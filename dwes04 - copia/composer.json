@@ -1,0 +1,20 @@
+{
+    "name": "mario/dwes04",
+    "description": "Tarea 04 DWES con composer",
+    "type": "project",
+    "require": {
+        "smarty/smarty": "^5.4"
+    },
+    "license": "CC-BY-NC-SA-4.0",
+    "autoload": {
+        "psr-4": {
+			"DWES04\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mario Puerma Cortés"
+        }
+    ],
+    "minimum-stability": "dev"
+}

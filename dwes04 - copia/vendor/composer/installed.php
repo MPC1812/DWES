@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'mario/dwes04',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '9a129119e7e4a6d1ddc79513279abf6f69c03384',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'mario/dwes04' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '9a129119e7e4a6d1ddc79513279abf6f69c03384',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'smarty/smarty' => array(
+            'pretty_version' => 'v5.4.3',
+            'version' => '5.4.3.0',
+            'reference' => 'c6bff5795081ca5e60aabda59fb87daa511acd1e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../smarty/smarty',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-mbstring' => array(
+            'pretty_version' => '1.x-dev',
+            'version' => '1.9999999.9999999.9999999-dev',
+            'reference' => '6d857f4d76bd4b343eac26d6b539585d2bc56493',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

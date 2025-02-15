@@ -1,0 +1,11 @@
+{
+    "name": "salvadorromerovillegas/dwes04_sol",
+    "description": "Soluci\u0000n de la tarea de la unidad 4",
+    "type": "project",
+    "require": {
+        "smarty/smarty": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {"DWES04\\": "src/"}
+    }
+}
