@@ -1,11 +1,12 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use TEST\helper;
+//use TEST\helper;
 //use TEST\helper as myhelper; Podemos personalizar el nombre de la clase
-use TEST\modelo\Impresora;
+//use TEST\modelo\Impresora;
+use TEST\controladores\Controlador;
 
-$numeroAlAzar=helper::randomNumber();
+//$numeroAlAzar=helper::randomNumber();
 //$numeroAlAzar=myhelper::randomNumber();
 
 //var_dump(TEST\modelo\Impresora::TIPOS);
@@ -15,14 +16,12 @@ $numeroAlAzar=helper::randomNumber();
 $pdo = new PDO('mysql:dbname=impresoras_db;host=localhost;port=3306;charset=utf8' ,'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-$listadoImpresoras=Impresora::obtenerImpresoras($pdo);
-//var_dump($listadoImpresoras);
-
 $smarty = new Smarty();
 $smarty->template_dir=__DIR__.'/templates';
 $smarty->compile_dir=__DIR__.'/tmp/compiladas';
 $smarty->cache_dir=__DIR__.'/tmp/cache';
 
-$smarty->assign('numeroAlAzar', $numeroAlAzar);
-$smarty->display('lista.tpl');
-//var_dump(TEST\modelo\Impresora::obtenerImpresoras($pdo));
+//$listadoImpresoras=Impresora::obtenerImpresoras($pdo);
+//var_dump($listadoImpresoras);
+Controlador::mostrarNumeroAlAzar($smarty);
+
