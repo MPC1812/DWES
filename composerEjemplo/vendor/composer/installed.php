@@ -3,7 +3,7 @@
         'name' => 'mario/composer-ejemplo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f8c9fbad5078a0c0894d82671179c3ab19c5ea9a',
+        'reference' => 'cc8806057c3668cf348c69cc3619e6f981fb9737',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'mario/composer-ejemplo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f8c9fbad5078a0c0894d82671179c3ab19c5ea9a',
+            'reference' => 'cc8806057c3668cf348c69cc3619e6f981fb9737',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -8,15 +8,15 @@ use TEST\modelo\Impresora;
 $numeroAlAzar=helper::randomNumber();
 //$numeroAlAzar=myhelper::randomNumber();
 
-var_dump(TEST\modelo\Impresora::TIPOS);
+//var_dump(TEST\modelo\Impresora::TIPOS);
 
-echo "El número al azar es: " . $numeroAlAzar;
+//echo "El número al azar es: " . $numeroAlAzar;
 
-$pdo = new PDO('mysql:dbname=impresoras_db;host=localhost;port=3306' ,'root', '');
+$pdo = new PDO('mysql:dbname=impresoras_db;host=localhost;port=3306;charset=utf8' ,'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
 $listadoImpresoras=Impresora::obtenerImpresoras($pdo);
-var_dump($listadoImpresoras);
+//var_dump($listadoImpresoras);
 
 $smarty = new Smarty();
 $smarty->template_dir=__DIR__.'/templates';
