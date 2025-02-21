@@ -18,3 +18,8 @@ function validatePin(string $pin): bool
         return false;
     }
 }
+
+function validatePin2(string $pin): bool
+{
+    return preg_match('/^(\d{4}|\d{6})$/', $pin);
+}
