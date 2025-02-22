@@ -21,7 +21,10 @@ $smarty->template_dir=__DIR__.'/templates';
 $smarty->compile_dir=__DIR__.'/tmp/compiladas';
 $smarty->cache_dir=__DIR__.'/tmp/cache';
 
-//$listadoImpresoras=Impresora::obtenerImpresoras($pdo);
-//var_dump($listadoImpresoras);
-Controlador::mostrarNumeroAlAzar($smarty);
-
+switch ($_GET['accion']??'alazar'){
+    case 'impresoras':
+        Controlador::mostrarImpresoras($smarty, $pdo);
+        break;
+    default:
+        Controlador::mostrarNumeroAlAzar($smarty);
+}

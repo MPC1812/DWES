@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de impresoras</title>
+    <title>Ejemplo de uso de composer</title>
 </head>
 <body>
     Número al azar: {$numeroAlAzar}
