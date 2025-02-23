@@ -1,6 +1,6 @@
 <?php
 
-namespace DWES04;
+namespace DWES04\modelo;
 
 class Libros
 {

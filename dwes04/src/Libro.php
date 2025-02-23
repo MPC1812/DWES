@@ -1,6 +1,6 @@
 <?php
 
-namespace DWES04;
+namespace DWES04\modelo;
 
 class Libro implements IGuardableMPC
 {
@@ -15,7 +15,7 @@ class Libro implements IGuardableMPC
     private $fecha_actualizacion=null;
 
 
-    public function getid()
+    public function getId()
     {
         return $this->id;
     }
@@ -94,7 +94,22 @@ class Libro implements IGuardableMPC
     {}
 
     public static function rescatar (\PDO $pdo, int $id)
-    {}
+    {
+        $ret=false;
+        $query='SELECT * FROM activos WHERE id=:id';
+        try {
+            $pdostmt=$pdo->prepare($query);
+            $pdostmt->bindParam('id',$id);
+            if ($pdostmt->execute())
+            {
+                $ret=$pdostmt->fetch(\PDO::FETCH_CLASS, 'DWES04\\modelo\\Libro');
+            }
+        }
+        catch (\PDOException $e)
+        {
+            $ret=-1;
+        }
+    }
 
     public static function borrar (\PDO $pdo, int $id)
     {

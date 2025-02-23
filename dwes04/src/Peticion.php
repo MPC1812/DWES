@@ -1,6 +1,6 @@
 <?php
 
-//namespace DWES04;
+namespace DWES04\modelo;
 
 /**
  * Clase que facilita la gestión de parámetros recibidos vía GET y POST. 
