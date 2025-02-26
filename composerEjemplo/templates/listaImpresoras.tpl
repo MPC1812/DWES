@@ -17,12 +17,15 @@
       <tbody>
       {foreach $listadoImpresoras as $impresora}
       <tr>
-        <td>{$impresora.id}</td>
-        <td>{$impresora.tipo}</td>
-        <td>{$impresora.nombre}</td>
+        <td>{$impresora->getId()}</td>
+        <td>{$impresora->getTipo()}</td>
+        <td>{$impresora->getNombre()}</td>
       </tr>
       {/foreach}
       </tbody>
     </table>
+    <a href="?accion=crear">
+    <input type="button" value="Crear nueva impresora">
+    </a>
   </body>
 </html>

@@ -1,40 +1,24 @@
 <?php
-include_once __DIR__ . '/vendor/autoload.php';
-include_once __DIR__ . '/conf/conf.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/conf/conf.php';
 
+use DWES04\controladores\ControladorMPC;
+use DWES04\Peticion as Peticion;
 
-use DWES04\Peticion;
-use DWES04\IGuardableMPC;
-use DWES04\Libros;
-
+//Comprobamos si existe Smarty
+if (!class_exists('Smarty')) {
+    throw new Exception('No se encontro la clase Smarty');
+}
 //Configuramos Smarty
 $smarty = new Smarty();
 $smarty->template_dir = __DIR__ . TEMPLATE_DIR;
 $smarty->compile_dir = __DIR__ . TEMPLATE_C_DIR;
 $smarty->cache_dir = __DIR__ . CACHE_DIR;
 
-
-/*
-//Comprobamos si existe Smarty
-if (!class_exists('Smarty')) {
-    throw new Exception('No se encontro la clase Smarty');
-}
-
-//Comprobamos si existe la clase Peticion
-if (!class_exists('DWES04\Peticion')) {
-    throw new Exception('No se encontro la clase DWES04\Peticion');
-}
-
 //Comprobamos si existe el archivo de configuracion
-if (!file_exists(__DIR__ . '/conf.php')) {
+if (!file_exists(__DIR__ . '/conf/conf.php')) {
     throw new Exception('No se encontro el archivo de configuracion');
 }
-
-//Comprobamos si existe el archivo de controladores
-if (!file_exists(__DIR__ . '/controladorMPC.php')) {
-    throw new Exception('No se encontro el archivo de controladores');
-}
-*/
 
 //Conectamos a la base de datos
 try {
@@ -44,10 +28,51 @@ try {
         DB_PASSWD,
         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
     );
-    echo 'Conectado a la base de datos';
 } catch (PDOException $e) {
     die('Error DB, no se puede conectar a la base de datos. Revise la configuración.');
 }
 
-$libros = new Libros();
-$libros->listarMPC($pdoConn);
+//Comprobamos si existe el archivo de controladores
+if (!file_exists(__DIR__ . '/src/controladores/ControladorMPC.php')) {
+    throw new Exception('No se encontro el archivo de controladores');
+}
+
+//Comprobamos si existe la clase Peticion
+if (!file_exists(__DIR__ . '/src/Peticion.php')) {
+    throw new Exception('No se encontro la clase Peticion');
+}
+//Procesamos la petición
+$p=new Peticion();
+var_dump($p);
+$ruta=$p->getPath();
+echo "Ruta: ";    
+var_dump($ruta);
+echo "ROOTPATH: ";
+var_dump(ROOTPATH);
+
+
+//Enrutado
+if ($ruta==='/dwes04/index.php'){
+    ControladorMPC::controladorDefecto($p, $smarty, $ruta);
+}
+elseif ($ruta==='/guardarLibro')
+{
+    ControladorMPC::crearLibro($p,$smarty,$pdoConn);
+}
+elseif ($ruta==='/mostrarlibros')
+{
+    ControladorMPC::mostrarLibros($smarty,$pdoConn);
+}
+elseif ($ruta==='/borrarlibro')
+{
+    ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
+}
+elseif ($ruta==='/addlibro')
+{
+    ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
+}
+else
+{
+    ControladorMPC::controladorDefecto($p, $smarty, $ruta); 
+    ControladorMPC::mostrarLibros($smarty,$pdoConn);
+}

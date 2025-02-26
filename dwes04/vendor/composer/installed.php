@@ -3,7 +3,7 @@
         'name' => 'mario/dwes04',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f9ef27a596fe5b46d2d65ad53afb81ee6a843ab5',
+        'reference' => 'd089f3a896acef103a9f06ccec261bf142018670',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'mario/dwes04' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f9ef27a596fe5b46d2d65ad53afb81ee6a843ab5',
+            'reference' => 'd089f3a896acef103a9f06ccec261bf142018670',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
