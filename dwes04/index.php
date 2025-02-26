@@ -52,12 +52,12 @@ var_dump(ROOTPATH);
 
 
 //Enrutado
-if ($ruta==='/dwes04/index.php'){
-    ControladorMPC::controladorDefecto($p, $smarty, $ruta);
+if ($ruta==='/index.php'){
+    ControladorMPC::mostrarLibros($smarty,$pdoConn);
 }
-elseif ($ruta==='/guardarLibro')
+elseif ($ruta==='/addlibro')
 {
-    ControladorMPC::crearLibro($p,$smarty,$pdoConn);
+    ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
 }
 elseif ($ruta==='/mostrarlibros')
 {
@@ -67,12 +67,7 @@ elseif ($ruta==='/borrarlibro')
 {
     ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
 }
-elseif ($ruta==='/addlibro')
-{
-    ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
-}
 else
 {
     ControladorMPC::controladorDefecto($p, $smarty, $ruta); 
-    ControladorMPC::mostrarLibros($smarty,$pdoConn);
 }

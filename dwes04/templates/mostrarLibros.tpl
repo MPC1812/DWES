@@ -9,7 +9,7 @@
     }
 
     table thead tr {
-        background-color: #009879;
+        background-color: #3e8e41;
         color: #ffffff;
         text-align: left;
     }

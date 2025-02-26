@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-02-26 18:00:36
+/* Smarty version 4.5.5, created on 2025-02-26 20:09:47
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\addlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67bf48b439f047_97989359',
+  'unifunc' => 'content_67bf66fb580994_66708507',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9a45485402790b5790487508d5a87013feb4ce03' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\addlibro.tpl',
-      1 => 1740589230,
+      1 => 1740596973,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67bf48b439f047_97989359 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67bf66fb580994_66708507 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -40,7 +40,7 @@ function content_67bf48b439f047_97989359 (Smarty_Internal_Template $_smarty_tpl)
     }
 
     table thead tr {
-        background-color: #009879;
+        background-color: #3e8e41;
         color: #ffffff;
         text-align: left;
     }
@@ -49,15 +49,19 @@ function content_67bf48b439f047_97989359 (Smarty_Internal_Template $_smarty_tpl)
     table td {
         padding: 12px 15px;
     }
+    form {
+    margin-top: 1em;
+    }
 </style>
 <form action="/addlibro" method="post">
-<input type="number" name="isbn" placeholder="ISBN">
-<input type="text" name="titulo" placeholder="Título">
-<input type="text" name="autor" placeholder="Autor">
-<input type="number" name="anio" placeholder="Año de publicación">
-<input type="number" name="paginas" placeholder="Número de páginas">
-<input type="number" name="ejemplares" placeholder="Ejemplares disponibles">
-<button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR</button>
+<input type="text" name="id" placeholder="ID Sólo para modificar">	
+<input type="text" name="isbn" placeholder="ISBN" required>
+<input type="text" name="titulo" placeholder="Título" required>
+<input type="text" name="autor" placeholder="Autor" required>
+<input type="text" name="anio" placeholder="Año de publicación" required>
+<input type="text" name="paginas" placeholder="Número de páginas" required>
+<input type="text" name="ejemplares" placeholder="Ejemplares disponibles" required>
+<button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR/MODIFICAR</button>
 </form>
 <table border="1px solid blue">
     <thead>
@@ -99,7 +103,6 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
 </td>
                 <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getFechaActualizacion();?>
 </td>
-                <td><button type="submit" name="modificar" class="btn btn-dark btn-sm">MODIFICAR</button></td>
             </tr>
         <?php
 }

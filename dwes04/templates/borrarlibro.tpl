@@ -17,7 +17,7 @@
     }
 
     table thead tr {
-        background-color: #009879;
+        background-color: #3e8e41;
         color: #ffffff;
         text-align: left;
     }
@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            {foreach array_reverse($listadolibros) as $libro}
+            {foreach $listadolibros as $libro}
                 <tr>
                     <td>{$libro->getId()}</td>
                     <td>{$libro->getIsbn()}</td>
@@ -56,7 +56,7 @@
                     <td>{$libro->getFechaActualizacion()}</td>
                     <td>
                         <button type="submit" name="id" class="btn btn-dark btn-sm"
-                            value="{$libro->getId()}">BORRAR</button>
+                            value="{$libro->getId()}" >BORRAR</button>
                     </td>
                 </tr>
             {/foreach}

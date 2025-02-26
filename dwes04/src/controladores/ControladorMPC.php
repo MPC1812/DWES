@@ -10,15 +10,15 @@ class ControladorMPC
 {
     public static function mostrarLibros(\Smarty $smarty, \PDO $pdo)
     {
+        $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'mostrarLibros');
         $smarty->display('mostrarLibros.tpl');
     }
 
-    public static function crearLibro(Peticion $p, \Smarty $smarty, \PDO $pdo) {}
-
     public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo) {
+        $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'borrarlibro');
@@ -29,26 +29,39 @@ class ControladorMPC
 
     public static function guardarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
+        $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'addlibro');
         $smarty->display('addlibro.tpl');
-        if ($p->has('isbn') == false) return;
-        $libro = new Libro();
-        $libro->setIsbn($p->getString('isbn'));
-        $libro->setTitulo($p->getString('titulo'));
-        $libro->setAutor($p->getString('autor'));
-        $libro->setAnioPublicacion($p->getString('anio'));
-        $libro->setEjemplaresDisponibles($p->getString('ejemplares'));
-        $libro->setPaginas($p->getString('paginas'));
-        var_dump($libro->guardar($pdo));
-        var_dump($libro->getId());
+        if ($p->has('isbn') == true && $p->has('titulo') == true && $p->has('autor') == true &&$p->has('anio') == true
+        && $p->has('ejemplares') == true && $p->has('paginas') == true) {
+            if ($p->has('id') == false || $p->getString('id') == '' || ($p->getString('id') == null || !in_array($p->getString('id'),$listadolibros))) {
+                $libro = new Libro();
+                $libro->setIsbn($p->getString('isbn'));
+                $libro->setTitulo($p->getString('titulo'));
+                $libro->setAutor($p->getString('autor'));
+                $libro->setAnioPublicacion($p->getString('anio'));
+                $libro->setEjemplaresDisponibles($p->getString('ejemplares'));
+                $libro->setPaginas($p->getString('paginas'));
+                $libro->guardar($pdo);
+            } else {
+                $librom = Libro::rescatar($pdo, $p->getString('id'));
+                $librom->setIsbn($p->getString('isbn'));
+                $librom->setTitulo($p->getString('titulo'));
+                $librom->setAutor($p->getString('autor'));
+                $librom->setAnioPublicacion($p->getString('anio'));
+                $librom->setEjemplaresDisponibles($p->getString('ejemplares'));
+                $librom->setPaginas($p->getString('paginas'));
+                $librom->guardar($pdo);
+            }
+        }
     }
 
     public static function controladorDefecto(Peticion $p, \Smarty $smarty, $ruta)
     {
         if ($ruta !== '' && $ruta != '/') $smarty->assign('rutanoexistente', $ruta);
-        $smarty->assign('rootpath', ROOTPATH.'index.php');
+        //$smarty->assign('rootpath', ROOTPATH.'index.php');
         $smarty->display('default.tpl');
     }
 }

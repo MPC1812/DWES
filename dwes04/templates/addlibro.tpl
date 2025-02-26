@@ -17,7 +17,7 @@
     }
 
     table thead tr {
-        background-color: #009879;
+        background-color: #3e8e41;
         color: #ffffff;
         text-align: left;
     }
@@ -26,15 +26,19 @@
     table td {
         padding: 12px 15px;
     }
+    form {
+    margin-top: 1em;
+    }
 </style>
 <form action="/addlibro" method="post">
-<input type="number" name="isbn" placeholder="ISBN">
-<input type="text" name="titulo" placeholder="Título">
-<input type="text" name="autor" placeholder="Autor">
-<input type="number" name="anio" placeholder="Año de publicación">
-<input type="number" name="paginas" placeholder="Número de páginas">
-<input type="number" name="ejemplares" placeholder="Ejemplares disponibles">
-<button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR</button>
+<input type="text" name="id" placeholder="ID Sólo para modificar">	
+<input type="text" name="isbn" placeholder="ISBN" required>
+<input type="text" name="titulo" placeholder="Título" required>
+<input type="text" name="autor" placeholder="Autor" required>
+<input type="text" name="anio" placeholder="Año de publicación" required>
+<input type="text" name="paginas" placeholder="Número de páginas" required>
+<input type="text" name="ejemplares" placeholder="Ejemplares disponibles" required>
+<button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR/MODIFICAR</button>
 </form>
 <table border="1px solid blue">
     <thead>
@@ -62,7 +66,6 @@
                 <td>{$libro->getEjemplaresDisponibles()}</td>
                 <td>{$libro->getFechaCreacion()}</td>
                 <td>{$libro->getFechaActualizacion()}</td>
-                <td><button type="submit" name="modificar" class="btn btn-dark btn-sm">MODIFICAR</button></td>
             </tr>
         {/foreach}
     </tbody>
