@@ -10,14 +10,13 @@ class ControladorMPC
 {
     public static function mostrarLibros(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
-        if ($p->has('ordenar') == true) {
-            $ordenar = $p->getString('ordenar');
+        if ($p->getMethod() === 'GET') {
+            $ordenar = true;
         } else {
-            $ordenar = 'SORT_DESC';
+            $ordenar = false;
         }
         $smarty->display('barra.tpl');
-        $listadolibros = Libros::listarMPC($pdo);
-        var_dump($listadolibros);
+        $listadolibros = Libros::listarMPC($pdo, $ordenar);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'mostrarLibros');
         $smarty->display('mostrarLibros.tpl');
@@ -25,7 +24,7 @@ class ControladorMPC
 
     public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo) {
         $smarty->display('barra.tpl');
-        $listadolibros = Libros::listarMPC($pdo);
+        $listadolibros = Libros::listarMPC($pdo, false);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'borrarlibro');
         $smarty->display('borrarlibro.tpl');
@@ -36,13 +35,13 @@ class ControladorMPC
     public static function guardarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
         $smarty->display('barra.tpl');
-        $listadolibros = Libros::listarMPC($pdo);
+        $listadolibros = Libros::listarMPC($pdo, false);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'addlibro');
         $smarty->display('addlibro.tpl');
         if ($p->has('isbn') == true && $p->has('titulo') == true && $p->has('autor') == true &&$p->has('anio') == true
         && $p->has('ejemplares') == true && $p->has('paginas') == true) {
-            if ($p->has('id') == false || $p->getString('id') == '' || ($p->getString('id') == null || !in_array($p->getString('id'),$listadolibros))) {
+            if ($p->has('id') == false || $p->getString('id') == '' || $p->getString('id') == null || in_array($p->getString('id'),$listadolibros)) {
                 $libro = new Libro();
                 $libro->setIsbn($p->getString('isbn'));
                 $libro->setTitulo($p->getString('titulo'));
@@ -59,6 +58,7 @@ class ControladorMPC
                 $librom->setAnioPublicacion($p->getString('anio'));
                 $librom->setEjemplaresDisponibles($p->getString('ejemplares'));
                 $librom->setPaginas($p->getString('paginas'));
+                $librom->getFechaActualizacion();
                 $librom->guardar($pdo);
             }
         }

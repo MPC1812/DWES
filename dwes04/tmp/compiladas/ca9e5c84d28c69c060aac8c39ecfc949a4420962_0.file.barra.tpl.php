@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-01 21:15:37
+/* Smarty version 4.5.5, created on 2025-03-02 04:25:17
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\barra.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c36ae9b930c7_13539105',
+  'unifunc' => 'content_67c3cf9d00ef62_20638979',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ca9e5c84d28c69c060aac8c39ecfc949a4420962' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\barra.tpl',
-      1 => 1740597768,
+      1 => 1740885914,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c36ae9b930c7_13539105 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c3cf9d00ef62_20638979 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -55,7 +55,7 @@ function content_67c36ae9b930c7_13539105 (Smarty_Internal_Template $_smarty_tpl)
 <body>
 
 <div class="navbar">
-    <a href="/addlibro">Añadir Libro</a>
+    <a href="/addlibro">Añadir / Modificar Libro</a>
     <a href="/borrarlibro">Borrar Libro</a>
     <a href="/mostrarlibros">Mostrar Libros</a>
     <a href="/index.php" class="main-page">Página Principal</a>

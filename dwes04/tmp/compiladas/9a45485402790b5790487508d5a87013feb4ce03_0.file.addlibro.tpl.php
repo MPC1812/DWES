@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-02-26 20:09:47
+/* Smarty version 4.5.5, created on 2025-03-02 04:23:05
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\addlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67bf66fb580994_66708507',
+  'unifunc' => 'content_67c3cf19c7ac74_47861525',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9a45485402790b5790487508d5a87013feb4ce03' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\addlibro.tpl',
-      1 => 1740596973,
+      1 => 1740885781,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67bf66fb580994_66708507 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c3cf19c7ac74_47861525 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=100%, initial-scale=1.0">
-    <title>Añadir libro</title>
+    <title>Añadir/Modificar libro</title>
 </head>
 <style>
     table {

@@ -32,7 +32,7 @@
 <body>
 
 <div class="navbar">
-    <a href="/addlibro">Añadir Libro</a>
+    <a href="/addlibro">Añadir / Modificar Libro</a>
     <a href="/borrarlibro">Borrar Libro</a>
     <a href="/mostrarlibros">Mostrar Libros</a>
     <a href="/index.php" class="main-page">Página Principal</a>

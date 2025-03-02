@@ -117,8 +117,7 @@ class Libro implements IGuardableMPC
             }
         } else { // Puedo actualizar
             $SQL = 'UPDATE libros SET isbn=:isbn, titulo=:titulo, autor=:autor, anio_publicacion=:anio_publicacion, 
-        paginas=:paginas, ejemplares_disponibles=:ejemplares_disponibles, fecha_creacion=:fecha_creacion, 
-        fecha_actualizacion=:fecha_actualizacion WHERE id=:id';
+        paginas=:paginas, ejemplares_disponibles=:ejemplares_disponibles WHERE id=:id';
             try {
                 $stmt = $pdo->prepare($SQL);
                 $stmt->bindValue(':isbn', $this->isbn);
@@ -127,12 +126,10 @@ class Libro implements IGuardableMPC
                 $stmt->bindValue(':anio_publicacion', $this->anio_publicacion);
                 $stmt->bindValue(':paginas', $this->paginas);
                 $stmt->bindValue(':ejemplares_disponibles', $this->ejemplares_disponibles);
-                $stmt->bindValue(':fecha_creacion', $this->fecha_creacion);
-                $stmt->bindValue(':fecha_actualizacion', $this->fecha_actualizacion);
                 $stmt->bindValue(':id', $this->id);
                 $stmt->execute();
                 if ($stmt->rowCount() > 0) {
-                    $this->fecha_actualizacion = date('Y-m-d H:i:s');
+                    $this->fecha_actualizacion = $pdo->quote(date('Y-m-d H:i:s'));
                     return true;
                 }
             } catch (\PDOException $e) {

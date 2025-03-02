@@ -4,10 +4,11 @@ namespace DWES04\modelo;
 
 class Libros
 {
-    public static function listarMPC(\PDO $pdo): array|int
+    public static function listarMPC(\PDO $pdo, bool $ordenar): array|int
     {
+        if ($ordenar){$sql = "SELECT * FROM libros ORDER BY fecha_creacion DESC";}
+        else{$sql = "SELECT * FROM libros ORDER BY fecha_actualizacion ASC";}
         try {
-            $sql = "SELECT * FROM libros";
             $resultado = $pdo->query($sql);
             $libros = [];
             foreach ($resultado as $fila) {

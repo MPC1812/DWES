@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=100%, initial-scale=1.0">
-    <title>Añadir libro</title>
+    <title>Añadir/Modificar libro</title>
 </head>
 <style>
     table {

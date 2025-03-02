@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-02-26 18:21:07
+/* Smarty version 4.5.5, created on 2025-03-02 03:01:23
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\mostrarLibros.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67bf4d83cf1cc8_99003227',
+  'unifunc' => 'content_67c3bbf3d48f92_08681116',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5abfbf2bf6f39a03aeff69a6a92c5e06bf131734' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\mostrarLibros.tpl',
-      1 => 1740590449,
+      1 => 1740880494,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67bf4d83cf1cc8_99003227 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c3bbf3d48f92_08681116 (Smarty_Internal_Template $_smarty_tpl) {
 ?><style>
     table {
         border-collapse: collapse;
