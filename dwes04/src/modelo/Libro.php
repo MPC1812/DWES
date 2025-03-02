@@ -129,7 +129,6 @@ class Libro implements IGuardableMPC
                 $stmt->bindValue(':id', $this->id);
                 $stmt->execute();
                 if ($stmt->rowCount() > 0) {
-                    $this->fecha_actualizacion = $pdo->quote(date('Y-m-d H:i:s'));
                     return true;
                 }
             } catch (\PDOException $e) {
