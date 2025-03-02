@@ -53,7 +53,7 @@ var_dump(ROOTPATH);
 
 //Enrutado
 if ($ruta==='/index.php'){
-    ControladorMPC::mostrarLibros($smarty,$pdoConn);
+    ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
 elseif ($ruta==='/addlibro')
 {
@@ -61,7 +61,7 @@ elseif ($ruta==='/addlibro')
 }
 elseif ($ruta==='/mostrarlibros')
 {
-    ControladorMPC::mostrarLibros($smarty,$pdoConn);
+    ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
 elseif ($ruta==='/borrarlibro')
 {

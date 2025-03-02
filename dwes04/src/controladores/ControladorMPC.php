@@ -8,10 +8,16 @@ use DWES04\modelo\Libros;
 
 class ControladorMPC
 {
-    public static function mostrarLibros(\Smarty $smarty, \PDO $pdo)
+    public static function mostrarLibros(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
+        if ($p->has('ordenar') == true) {
+            $ordenar = $p->getString('ordenar');
+        } else {
+            $ordenar = 'SORT_DESC';
+        }
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo);
+        var_dump($listadolibros);
         $smarty->assign('listadolibros', $listadolibros);
         $smarty->assign('rootpath', ROOTPATH . 'mostrarLibros');
         $smarty->display('mostrarLibros.tpl');
