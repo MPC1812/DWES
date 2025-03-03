@@ -10,23 +10,30 @@ class ControladorMPC
 {
     public static function mostrarLibros(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
-        if ($p->getMethod() === 'GET') {
+        if ($p->has('ordenar') && $p->getString('ordenar') == 'true') {
             $ordenar = true;
-        } else {
+        } elseif ($p->has('ordenar') && $p->getString('ordenar') == 'false') {
             $ordenar = false;
+        } else {
+            if ($p->getMethod() === 'GET') {
+                $ordenar = true;
+            } else {
+                $ordenar = false;
+            }
         }
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, $ordenar);
         $smarty->assign('listadolibros', $listadolibros);
-        $smarty->assign('rootpath', ROOTPATH . 'mostrarLibros');
+        //$smarty->assign('rootpath', 'mostrarLibros');
         $smarty->display('mostrarLibros.tpl');
     }
 
-    public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo) {
+    public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
+    {
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, false);
         $smarty->assign('listadolibros', $listadolibros);
-        $smarty->assign('rootpath', ROOTPATH . 'borrarlibro');
+        //$smarty->assign('rootpath', 'borrarlibro');
         $smarty->display('borrarlibro.tpl');
         if ($p->has('id') == false) return;
         libro::borrar($pdo, $p->getString('id'));
@@ -37,11 +44,13 @@ class ControladorMPC
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, false);
         $smarty->assign('listadolibros', $listadolibros);
-        $smarty->assign('rootpath', ROOTPATH . 'addlibro');
+        //$smarty->assign('rootpath', 'addlibro');
         $smarty->display('addlibro.tpl');
-        if ($p->has('isbn') == true && $p->has('titulo') == true && $p->has('autor') == true &&$p->has('anio') == true
-        && $p->has('ejemplares') == true && $p->has('paginas') == true) {
-            if ($p->has('id') == false || $p->getString('id') == '' || $p->getString('id') == null || in_array($p->getString('id'),$listadolibros)) {
+        if (
+            $p->has('isbn') == true && $p->has('titulo') == true && $p->has('autor') == true && $p->has('anio') == true
+            && $p->has('ejemplares') == true && $p->has('paginas') == true
+        ) {
+            if ($p->has('id') == false || $p->getString('id') == '' || $p->getString('id') == null || in_array($p->getString('id'), $listadolibros)) {
                 $libro = new Libro();
                 $libro->setIsbn($p->getString('isbn'));
                 $libro->setTitulo($p->getString('titulo'));
@@ -64,10 +73,26 @@ class ControladorMPC
         }
     }
 
-    public static function controladorDefecto(Peticion $p, \Smarty $smarty, $ruta)
+    public static function controladorDefecto(Peticion $p, \Smarty $smarty, $ruta, \PDO $pdo)
     {
         if ($ruta !== '' && $ruta != '/') $smarty->assign('rutanoexistente', $ruta);
-        //$smarty->assign('rootpath', ROOTPATH.'index.php');
+        //$smarty->assign('rootpath', 'index.php');
         $smarty->display('default.tpl');
+        if ($p->has('ordenar') && $p->getString('ordenar') == 'true') {
+            $ordenar = true;
+        } elseif ($p->has('ordenar') && $p->getString('ordenar') == 'false') {
+            $ordenar = false;
+        } else {
+            if ($p->getMethod() === 'GET') {
+                $ordenar = true;
+            } else {
+                $ordenar = false;
+            }
+        }
+        //$smarty->display('barra.tpl');
+        $listadolibros = Libros::listarMPC($pdo, $ordenar);
+        $smarty->assign('listadolibros', $listadolibros);
+        //$smarty->assign('rootpath', 'mostrarLibros');
+        $smarty->display('mostrarLibros.tpl');
     }
 }

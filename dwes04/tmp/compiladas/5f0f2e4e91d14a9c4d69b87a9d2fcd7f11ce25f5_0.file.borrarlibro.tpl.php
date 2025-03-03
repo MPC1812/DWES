@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-02-26 20:14:09
+/* Smarty version 4.5.5, created on 2025-03-03 11:55:41
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\borrarlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67bf6801db4d18_78892706',
+  'unifunc' => 'content_67c58aad2ae2a4_60844941',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f0f2e4e91d14a9c4d69b87a9d2fcd7f11ce25f5' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\borrarlibro.tpl',
-      1 => 1740596691,
+      1 => 1740999263,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67bf6801db4d18_78892706 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c58aad2ae2a4_60844941 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -50,7 +50,7 @@ function content_67bf6801db4d18_78892706 (Smarty_Internal_Template $_smarty_tpl)
         padding: 12px 15px;
     }
 </style>
-<form action="/borrarlibro" method="post">
+<form action="/dwes04/borrarlibro" method="post">
     <table border="1px solid blue">
         <thead>
             <tr>
@@ -103,5 +103,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         </tbody>
     </table>
 </form>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a><?php }
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+</html><?php }
 }

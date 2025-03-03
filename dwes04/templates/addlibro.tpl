@@ -30,7 +30,7 @@
     margin-top: 1em;
     }
 </style>
-<form action="/addlibro" method="post">
+<form action="/dwes04/addlibro" method="post">
 <input type="text" name="id" placeholder="ID Sólo para modificar">	
 <input type="text" name="isbn" placeholder="ISBN" required>
 <input type="text" name="titulo" placeholder="Título" required>
@@ -70,4 +70,5 @@
         {/foreach}
     </tbody>
 </table>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a>
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a>
+</html>

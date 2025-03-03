@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=100%, initial-scale=1.0">
+    <title>Mostrar libros</title>
+</head>
 <style>
     table {
         border-collapse: collapse;
@@ -19,6 +27,7 @@
         padding: 12px 15px;
     }
 </style>
+<form action="/dwes04/index.php" method="post">
 <table border="1px solid blue">
     <thead>
         <tr>
@@ -48,5 +57,11 @@
             </tr>
         {/foreach}
     </tbody>
+    <button type="submit" name="ordenar" class="btn btn-dark btn-sm"
+    value="true" >Ordenar por Fecha de Creación</button>
+    <button type="submit" name="ordenar" class="btn btn-dark btn-sm"
+    value="false" >Ordenar por Fecha de Actualización</button>
 </table>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+</form>
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+</html>

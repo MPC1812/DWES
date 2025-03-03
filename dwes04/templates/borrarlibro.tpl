@@ -27,7 +27,7 @@
         padding: 12px 15px;
     }
 </style>
-<form action="/borrarlibro" method="post">
+<form action="/dwes04/borrarlibro" method="post">
     <table border="1px solid blue">
         <thead>
             <tr>
@@ -63,4 +63,5 @@
         </tbody>
     </table>
 </form>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+</html>

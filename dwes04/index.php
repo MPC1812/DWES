@@ -43,31 +43,27 @@ if (!file_exists(__DIR__ . '/src/Peticion.php')) {
 }
 //Procesamos la petición
 $p=new Peticion();
-var_dump($p);
 $ruta=$p->getPath();
-echo "Ruta: ";    
-var_dump($ruta);
-echo "ROOTPATH: ";
-var_dump(ROOTPATH);
 
 
 //Enrutado
-if ($ruta==='/index.php'){
+if ($ruta==='/dwes04/index.php'){
     ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
-elseif ($ruta==='/addlibro')
+elseif ($ruta==='/dwes04/addlibro')
 {
     ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
 }
-elseif ($ruta==='/mostrarlibros')
+elseif ($ruta==='/dwes04/mostrarlibros')
 {
+
     ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
-elseif ($ruta==='/borrarlibro')
+elseif ($ruta==='/dwes04/borrarlibro')
 {
     ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
 }
 else
 {
-    ControladorMPC::controladorDefecto($p, $smarty, $ruta); 
+    ControladorMPC::controladorDefecto($p, $smarty, $ruta, $pdoConn);
 }

@@ -32,10 +32,10 @@
 <body>
 
 <div class="navbar">
-    <a href="/addlibro">Añadir / Modificar Libro</a>
-    <a href="/borrarlibro">Borrar Libro</a>
-    <a href="/mostrarlibros">Mostrar Libros</a>
-    <a href="/index.php" class="main-page">Página Principal</a>
+    <a href="/dwes04/addlibro">Añadir Libro</a>
+    <a href="/dwes04/borrarlibro">Borrar Libro</a>
+    <a href="/dwes04/mostrarlibros">Mostrar Libros</a>
+    <a href="/dwes04/index.php" class="main-page">Página Principal</a>
 </div>
 
 </body>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-02 04:23:05
+/* Smarty version 4.5.5, created on 2025-03-03 11:55:48
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\addlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c3cf19c7ac74_47861525',
+  'unifunc' => 'content_67c58ab408a240_23691277',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9a45485402790b5790487508d5a87013feb4ce03' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\addlibro.tpl',
-      1 => 1740885781,
+      1 => 1740999162,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c3cf19c7ac74_47861525 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c58ab408a240_23691277 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -53,7 +53,7 @@ function content_67c3cf19c7ac74_47861525 (Smarty_Internal_Template $_smarty_tpl)
     margin-top: 1em;
     }
 </style>
-<form action="/addlibro" method="post">
+<form action="/dwes04/addlibro" method="post">
 <input type="text" name="id" placeholder="ID Sólo para modificar">	
 <input type="text" name="isbn" placeholder="ISBN" required>
 <input type="text" name="titulo" placeholder="Título" required>
@@ -109,5 +109,6 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     </tbody>
 </table>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a><?php }
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a>
+</html><?php }
 }

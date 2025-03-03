@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-02 03:01:23
+/* Smarty version 4.5.5, created on 2025-03-03 13:34:02
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\mostrarLibros.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c3bbf3d48f92_08681116',
+  'unifunc' => 'content_67c5a1baba15c4_37768155',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5abfbf2bf6f39a03aeff69a6a92c5e06bf131734' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\mostrarLibros.tpl',
-      1 => 1740880494,
+      1 => 1741005235,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,16 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c3bbf3d48f92_08681116 (Smarty_Internal_Template $_smarty_tpl) {
-?><style>
+function content_67c5a1baba15c4_37768155 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=100%, initial-scale=1.0">
+    <title>Mostrar libros</title>
+</head>
+<style>
     table {
         border-collapse: collapse;
         margin: 25px 0;
@@ -42,6 +50,7 @@ function content_67c3bbf3d48f92_08681116 (Smarty_Internal_Template $_smarty_tpl)
         padding: 12px 15px;
     }
 </style>
+<form action="/dwes04/index.php" method="post">
 <table border="1px solid blue">
     <thead>
         <tr>
@@ -87,6 +96,12 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     </tbody>
+    <button type="submit" name="ordenar" class="btn btn-dark btn-sm"
+    value="true" >Ordenar por Fecha de Creación</button>
+    <button type="submit" name="ordenar" class="btn btn-dark btn-sm"
+    value="false" >Ordenar por Fecha de Actualización</button>
 </table>
-<a href='/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a><?php }
+</form>
+<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
+</html><?php }
 }
