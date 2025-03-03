@@ -63,5 +63,4 @@
     value="false" >Ordenar por Fecha de Actualización</button>
 </table>
 </form>
-<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
 </html>

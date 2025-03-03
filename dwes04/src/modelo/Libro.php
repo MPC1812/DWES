@@ -75,7 +75,7 @@ class Libro implements IGuardableMPC
         $this->autor = $autor;
     }
 
-    public function setAnioPublicacion(string $anio_publicacion)
+    public function setAnioPublicacion(int $anio_publicacion)
     {
         $this->anio_publicacion = $anio_publicacion;
     }

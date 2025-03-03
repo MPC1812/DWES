@@ -45,25 +45,38 @@ if (!file_exists(__DIR__ . '/src/Peticion.php')) {
 $p=new Peticion();
 $ruta=$p->getPath();
 
+var_dump($p);
 
 //Enrutado
-if ($ruta==='/dwes04/index.php'){
-    ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
-}
-elseif ($ruta==='/dwes04/addlibro')
+if ($ruta==='/dwes04/index.php')
 {
-    ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
+    ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
 elseif ($ruta==='/dwes04/mostrarlibros')
 {
 
     ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
-elseif ($ruta==='/dwes04/borrarlibro')
-{
-    ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
-}
+// elseif ($ruta==='/dwes04/borrarlibro')
+// {
+//     ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
+// }
 else
 {
     ControladorMPC::controladorDefecto($p, $smarty, $ruta, $pdoConn);
+}
+
+if (isset($_GET['accion'])) {
+    if ($_GET['accion']==='nuevo_libro_form_MPC')
+{
+    ControladorMPC::formlibro($smarty);
+}
+    if ($_GET['accion']==='crear_libro_MPC')
+{
+    ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
+}
+    if ($_GET['accion']==='borrar_libro_MPC')
+{
+    ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
+}
 }

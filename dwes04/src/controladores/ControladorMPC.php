@@ -24,54 +24,89 @@ class ControladorMPC
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, $ordenar);
         $smarty->assign('listadolibros', $listadolibros);
-        //$smarty->assign('rootpath', 'mostrarLibros');
-        $smarty->display('mostrarLibros.tpl');
+        if ($p->has('accion') && $p->getString('accion') === 'nuevo_libro_form_MPC') {
+        } elseif ($p->has('accion') && $p->getString('accion') === 'borrar_libro_MPC') {
+            $smarty->display('borrarlibro.tpl');
+            if ($p->has('id') && $p->getString('id') != '') {
+                $smarty->display('confirmarborrar.tpl');
+            }
+        } else {
+            $smarty->display('mostrarLibros.tpl');
+        }
     }
 
     public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
-        $smarty->display('barra.tpl');
-        $listadolibros = Libros::listarMPC($pdo, false);
-        $smarty->assign('listadolibros', $listadolibros);
-        //$smarty->assign('rootpath', 'borrarlibro');
-        $smarty->display('borrarlibro.tpl');
         if ($p->has('id') == false) return;
-        libro::borrar($pdo, $p->getString('id'));
+        if ($p->has('id') && $p->has('checkboxborrar')) {
+            libro::borrar($pdo, $p->getString('id'));
+        }
+    }
+
+    public static function formlibro(\Smarty $smarty)
+    {
+        $smarty->display('formlibro.tpl');
     }
 
     public static function guardarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
-        $smarty->display('barra.tpl');
-        $listadolibros = Libros::listarMPC($pdo, false);
-        $smarty->assign('listadolibros', $listadolibros);
-        //$smarty->assign('rootpath', 'addlibro');
-        $smarty->display('addlibro.tpl');
-        if (
-            $p->has('isbn') == true && $p->has('titulo') == true && $p->has('autor') == true && $p->has('anio') == true
-            && $p->has('ejemplares') == true && $p->has('paginas') == true
-        ) {
-            if ($p->has('id') == false || $p->getString('id') == '' || $p->getString('id') == null || in_array($p->getString('id'), $listadolibros)) {
-                $libro = new Libro();
-                $libro->setIsbn($p->getString('isbn'));
-                $libro->setTitulo($p->getString('titulo'));
-                $libro->setAutor($p->getString('autor'));
-                $libro->setAnioPublicacion($p->getString('anio'));
-                $libro->setEjemplaresDisponibles($p->getString('ejemplares'));
-                $libro->setPaginas($p->getString('paginas'));
-                $libro->guardar($pdo);
-            } else {
-                $librom = Libro::rescatar($pdo, $p->getString('id'));
-                $librom->setIsbn($p->getString('isbn'));
-                $librom->setTitulo($p->getString('titulo'));
-                $librom->setAutor($p->getString('autor'));
-                $librom->setAnioPublicacion($p->getString('anio'));
-                $librom->setEjemplaresDisponibles($p->getString('ejemplares'));
-                $librom->setPaginas($p->getString('paginas'));
-                $librom->getFechaActualizacion();
-                $librom->guardar($pdo);
-            }
+        $validar = false;
+        $mensaje = "";
+        if ($p->has('isbn') && $p->getString('isbn') != '' && $p->getString('isbn') != null && is_numeric($p->getString('isbn'))) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo ISBN no puede estar vacío, no debe ser nulo y debe ser un número <br>";
+            $validar = false;
         }
+        if ($p->has('titulo') && $p->getString('titulo') != '' && $p->getString('titulo') != null) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo Título no puede estar vacío, no debe ser nulo <br>";
+            $validar = false;
+        }
+        if ($p->has('autor') && $p->getString('autor') != '' && $p->getString('autor') != null) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo Autor no puede estar vacío, no debe ser nulo <br>";
+            $validar = false;
+        }
+        if ($p->has('anio') && $p->getString('anio') != '' && $p->getString('anio') != null && is_numeric($p->getString('anio'))) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo Año de publicación no puede estar vacío, no debe ser nulo y debe ser un número <br>";
+            $validar = false;
+        }
+        if ($p->has('paginas') && $p->getString('paginas') != '' && $p->getString('paginas') != null && is_numeric($p->getString('paginas'))) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo Número de páginas no puede estar vacío, no debe ser nulo y debe ser un número <br>";
+            $validar = false;
+        }
+        if ($p->has('ejemplares') && $p->getString('ejemplares') != '' && $p->getString('ejemplares') != null && is_numeric($p->getString('ejemplares'))) {
+            $validar = true;
+        } else {
+            $mensaje .= "El campo Ejemplares disponibles no puede estar vacío, no debe ser nulo y debe ser un número <br>";
+            $validar = false;
+        }
+
+        if ($validar) {
+
+            $libro = new Libro();
+            $libro->setIsbn($p->getString('isbn'));
+            $libro->setTitulo($p->getString('titulo'));
+            $libro->setAutor($p->getString('autor'));
+            $libro->setAnioPublicacion($p->getString('anio'));
+            $libro->setEjemplaresDisponibles($p->getString('ejemplares'));
+            $libro->setPaginas($p->getString('paginas'));
+            $libro->guardar($pdo);
+            $mensaje = "Se ha insertado un nuevo libro con id " . $libro->getId();
+        } else {
+            $mensaje .= "<br>NO SE HA PODIDO GUARDAR EL LIBRO";
+        }
+        $smarty->assign('mensaje', $mensaje);
+        $smarty->display('mensaje.tpl');
     }
+
 
     public static function controladorDefecto(Peticion $p, \Smarty $smarty, $ruta, \PDO $pdo)
     {

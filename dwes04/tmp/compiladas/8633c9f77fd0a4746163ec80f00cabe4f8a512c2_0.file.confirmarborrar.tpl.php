@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-03 22:16:39
-  from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\borrarlibro.tpl' */
+/* Smarty version 4.5.5, created on 2025-03-03 23:10:41
+  from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\confirmarborrar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c61c371956c0_19084853',
+  'unifunc' => 'content_67c628e15ed0c6_39243143',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '5f0f2e4e91d14a9c4d69b87a9d2fcd7f11ce25f5' => 
+    '8633c9f77fd0a4746163ec80f00cabe4f8a512c2' => 
     array (
-      0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\borrarlibro.tpl',
-      1 => 1741036593,
+      0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\confirmarborrar.tpl',
+      1 => 1741039815,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c61c371956c0_19084853 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c628e15ed0c6_39243143 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -92,6 +92,7 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
                     <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getFechaActualizacion();?>
 </td>
                     <td>
+                        <input type="checkbox" name="checkboxborrar" value="checkboxborrar">
                         <button type="submit" name="id" class="btn btn-dark btn-sm"
                             value="<?php echo $_smarty_tpl->tpl_vars['libro']->value->getId();?>
 " >BORRAR</button>

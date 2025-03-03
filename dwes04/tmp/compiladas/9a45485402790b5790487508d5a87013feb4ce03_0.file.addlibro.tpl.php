@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-03 11:55:48
+/* Smarty version 4.5.5, created on 2025-03-03 20:06:17
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\addlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c58ab408a240_23691277',
+  'unifunc' => 'content_67c5fda9e9c076_82918527',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9a45485402790b5790487508d5a87013feb4ce03' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\addlibro.tpl',
-      1 => 1740999162,
+      1 => 1741028775,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c58ab408a240_23691277 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c5fda9e9c076_82918527 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -49,66 +49,23 @@ function content_67c58ab408a240_23691277 (Smarty_Internal_Template $_smarty_tpl)
     table td {
         padding: 12px 15px;
     }
+
     form {
-    margin-top: 1em;
+        margin-top: 1em;
     }
 </style>
-<form action="/dwes04/addlibro" method="post">
-<input type="text" name="id" placeholder="ID Sólo para modificar">	
-<input type="text" name="isbn" placeholder="ISBN" required>
-<input type="text" name="titulo" placeholder="Título" required>
-<input type="text" name="autor" placeholder="Autor" required>
-<input type="text" name="anio" placeholder="Año de publicación" required>
-<input type="text" name="paginas" placeholder="Número de páginas" required>
-<input type="text" name="ejemplares" placeholder="Ejemplares disponibles" required>
-<button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR/MODIFICAR</button>
-</form>
-<table border="1px solid blue">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>ISBN</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Año de publicación</th>
-            <th>Número de páginas</th>
-            <th>Ejemplares disponibles</th>
-            <th>Fecha de creación</th>
-            <th>Fecha de actualización</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listadolibros']->value, 'libro');
-$_smarty_tpl->tpl_vars['libro']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['libro']->value) {
-$_smarty_tpl->tpl_vars['libro']->do_else = false;
-?>
-            <tr>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getId();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getIsbn();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getTitulo();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getAutor();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getAnioPublicacion();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getPaginas();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getEjemplaresDisponibles();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getFechaCreacion();?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getFechaActualizacion();?>
-</td>
-            </tr>
-        <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-    </tbody>
-</table>
-<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a>
+
+<body>
+    <form action="/dwes04/index.php?accion=nuevo_libro_form_MPC" method="post">
+        <input type="text" name="isbn" placeholder="ISBN" required>
+        <input type="text" name="titulo" placeholder="Título" required>
+        <input type="text" name="autor" placeholder="Autor" required>
+        <input type="text" name="anio" placeholder="Año de publicación" required>
+        <input type="text" name="paginas" placeholder="Número de páginas" required>
+        <input type="text" name="ejemplares" placeholder="Ejemplares disponibles" required>
+        <button type="submit" name="addlibro" class="btn btn-dark btn-sm">AÑADIR LIBRO</button>
+    </form>
+</body>
+
 </html><?php }
 }

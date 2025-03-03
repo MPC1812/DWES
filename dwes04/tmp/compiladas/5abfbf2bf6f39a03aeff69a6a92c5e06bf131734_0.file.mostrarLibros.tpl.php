@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-03 13:34:02
+/* Smarty version 4.5.5, created on 2025-03-03 20:19:30
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\mostrarLibros.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c5a1baba15c4_37768155',
+  'unifunc' => 'content_67c600c2c3d5b4_22115740',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5abfbf2bf6f39a03aeff69a6a92c5e06bf131734' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\mostrarLibros.tpl',
-      1 => 1741005235,
+      1 => 1741029568,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c5a1baba15c4_37768155 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c600c2c3d5b4_22115740 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -102,6 +102,5 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     value="false" >Ordenar por Fecha de Actualización</button>
 </table>
 </form>
-<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm">PÁGINA PRINCIPAL</button></a>
 </html><?php }
 }

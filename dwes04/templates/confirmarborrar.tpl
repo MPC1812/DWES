@@ -55,6 +55,7 @@
                     <td>{$libro->getFechaCreacion()}</td>
                     <td>{$libro->getFechaActualizacion()}</td>
                     <td>
+                        <input type="checkbox" name="checkboxborrar" value="checkboxborrar">
                         <button type="submit" name="id" class="btn btn-dark btn-sm"
                             value="{$libro->getId()}" >BORRAR</button>
                     </td>

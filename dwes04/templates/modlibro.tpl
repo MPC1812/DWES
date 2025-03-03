@@ -70,5 +70,4 @@
         {/foreach}
     </tbody>
 </table>
-<a href='/dwes04/index.php'><button type="submit" name="home" class="btn btn-dark btn-sm" method="post">PÁGINA PRINCIPAL</button></a>
 </html>
