@@ -2,14 +2,17 @@
 
 namespace DWES04\modelo;
 
+/**
+ * Interfaz IGuardableMPC.
+ * Contiene los métodos que deben implementarse en la clase Libro.
+ * @package DWES04\modelo
+ * @author Mario Puerma Cortés
+ */
 interface IGuardableMPC {
     
-    //Método a implementar en la clase Libro
     public function guardar (\PDO $pdo);
 
-    //Método a implementar en la clase Libro
     public static function rescatar (\PDO $pdo, int $id);
 
-    //Método a implementar en la clase Libro
     public static function borrar (\PDO $pdo, int $id);
 }

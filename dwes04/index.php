@@ -45,8 +45,6 @@ if (!file_exists(__DIR__ . '/src/Peticion.php')) {
 $p=new Peticion();
 $ruta=$p->getPath();
 
-var_dump($p);
-
 //Enrutado
 if ($ruta==='/dwes04/index.php')
 {
@@ -57,10 +55,6 @@ elseif ($ruta==='/dwes04/mostrarlibros')
 
     ControladorMPC::mostrarLibros($p,$smarty,$pdoConn);
 }
-// elseif ($ruta==='/dwes04/borrarlibro')
-// {
-//     ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
-// }
 else
 {
     ControladorMPC::controladorDefecto($p, $smarty, $ruta, $pdoConn);

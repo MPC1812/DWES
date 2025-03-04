@@ -6,8 +6,20 @@ use DWES04\Peticion as Peticion;
 use DWES04\modelo\Libro;
 use DWES04\modelo\Libros;
 
+/**
+ * Clase ControladorMPC.
+ * Contiene los métodos de la clase ControladorMPC. Permite operar con los libros almacenados en la base de datos.
+ * @package DWES04\controladores
+ * @author Mario Puerma Cortés
+ */
 class ControladorMPC
 {
+    /** Controlador encargado de la operación "mostrarLibros".
+     * Muestra la lista de libros almacenados en la base de datos.
+     * @param Peticion $p Instancia de la clase Peticion.
+     * @param \Smarty $smarty Instancia de la clase Smarty.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     */
     public static function mostrarLibros(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
         if ($p->has('ordenar') && $p->getString('ordenar') == 'true') {
@@ -35,6 +47,12 @@ class ControladorMPC
         }
     }
 
+    /** Controlador encargado de la operación "borrarLibro".
+     * Permite borrar un libro de la base de datos.
+     * @param Peticion $p Instancia de la clase Peticion.
+     * @param \Smarty $smarty Instancia de la clase Smarty.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     */
     public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
         if ($p->has('id') == false) return;
@@ -43,6 +61,10 @@ class ControladorMPC
         }
     }
 
+    /** Controlador encargado de la operación "formlibro".
+     * Muestra el formulario para la inserción de un nuevo libro.
+     * @param Smarty $smarty Instancia de la clase Smarty.
+     */
     public static function formlibro(\Smarty $smarty)
     {
         $smarty->display('formlibro.tpl');
@@ -107,11 +129,16 @@ class ControladorMPC
         $smarty->display('mensaje.tpl');
     }
 
-
+    /** Controlador por defecto.
+     * Muestra la página de inicio.
+     * @param Peticion $p Instancia de la clase Peticion.
+     * @param \Smarty $smarty Instancia de la clase Smarty.
+     * @param string $ruta Ruta solicitada en la petición http.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     */
     public static function controladorDefecto(Peticion $p, \Smarty $smarty, $ruta, \PDO $pdo)
     {
         if ($ruta !== '' && $ruta != '/') $smarty->assign('rutanoexistente', $ruta);
-        //$smarty->assign('rootpath', 'index.php');
         $smarty->display('default.tpl');
         if ($p->has('ordenar') && $p->getString('ordenar') == 'true') {
             $ordenar = true;
@@ -124,10 +151,8 @@ class ControladorMPC
                 $ordenar = false;
             }
         }
-        //$smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, $ordenar);
         $smarty->assign('listadolibros', $listadolibros);
-        //$smarty->assign('rootpath', 'mostrarLibros');
         $smarty->display('mostrarLibros.tpl');
     }
 }

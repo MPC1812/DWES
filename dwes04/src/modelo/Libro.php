@@ -2,8 +2,23 @@
 
 namespace DWES04\modelo;
 
+/**
+ * Clase Libro.
+ * Representa un libro. Contiene los datos del libro. Permite guardar y recuperar los datos.
+ * @package DWES04\modelo
+ * @author Mario Puerma Cortés
+ */
 class Libro implements IGuardableMPC
 {
+    /**
+     * Ejemplo de comentario de un atributo.
+     * @var int $id Identificador del libro.
+     * @access private
+     * 
+     * @var int $isbn Número de ISBN del libro.
+     * @access private
+     * ...
+     */
     private ?int $id = null;
     private ?int $isbn = null;
     private ?string $titulo = null;
@@ -14,7 +29,12 @@ class Libro implements IGuardableMPC
     private ?string $fecha_creacion = null;
     private ?string $fecha_actualizacion = null;
 
-
+    /**
+     * Ejemplo de comentario de un método, que devuelve un valor.
+     * getId(). Este método devuelve el valor de la variable $id.
+     * @return int
+     * @access public
+     */
     public function getId(): int
     {
         return $this->id;
@@ -60,6 +80,12 @@ class Libro implements IGuardableMPC
         return $this->ejemplares_disponibles;
     }
 
+    /**
+     * Ejemplo de comentario de un método, que guarda un valor.
+     * setIsbn(). Este método guarda el valor de la variable $isbn.
+     * @param int $isbn Número de ISBN del libro.
+     * @access public
+     */
     public function setIsbn(int $isbn)
     {
         $this->isbn = $isbn;
@@ -90,6 +116,12 @@ class Libro implements IGuardableMPC
         $this->ejemplares_disponibles = $ejemplares_disponibles;
     }
 
+    /**
+     * Función guardar(). Esta función guarda los datos del libro en la base de datos.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     * @return bool|int
+     * @access public
+     */
     public function guardar(\PDO $pdo)
     {
         if (is_null($this->id)) // Puedo guardar
@@ -138,7 +170,13 @@ class Libro implements IGuardableMPC
         return false;
     }
 
-
+    /**
+     * Función rescatar(). Esta función recupera los datos del libro de la base de datos.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     * @param int $id Identificador del libro.
+     * @return Libro|int|false
+     * @access public
+     */
     public static function rescatar(\PDO $pdo, int $id): Libro|int|false
     {
         $SQL = 'SELECT * FROM libros WHERE id=:id';
@@ -166,6 +204,13 @@ class Libro implements IGuardableMPC
         return false;
     }
 
+    /**
+     * Función borrar(). Esta función borra los datos del libro de la base de datos.
+     * @param \PDO $pdo Instancia válida de la clase PDO con una conexión activa.
+     * @param int $id Identificador del libro.
+     * @return int|bool
+     * @access public
+     */
     public static function borrar(\PDO $pdo, int $id): int|bool
     {
         $SQL = 'DELETE FROM libros WHERE id=:id';
