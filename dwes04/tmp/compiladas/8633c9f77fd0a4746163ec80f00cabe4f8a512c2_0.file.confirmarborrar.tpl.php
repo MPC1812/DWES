@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-06 02:14:05
+/* Smarty version 4.5.5, created on 2025-03-06 02:40:58
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\confirmarborrar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c8f6ddba03b4_39204637',
+  'unifunc' => 'content_67c8fd2a34a933_70901120',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8633c9f77fd0a4746163ec80f00cabe4f8a512c2' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\confirmarborrar.tpl',
-      1 => 1741223641,
+      1 => 1741225253,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c8f6ddba03b4_39204637 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c8fd2a34a933_70901120 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 

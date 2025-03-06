@@ -68,7 +68,6 @@ class ControladorMPC
             }
         }
         if ($p->isPost() && $p->getString('accion') === 'borrar_libro_MPC') {
-
             $idborrar = $p->getString('borrar');
             $smarty->assign('idborrar', $idborrar);
             $smarty->display('confirmarborrar.tpl');
@@ -88,8 +87,14 @@ class ControladorMPC
                 $smarty->display('mensaje.tpl');
             }
         }
+        if ($p->isPost() && $p->has('checkboxborrar') == false) {
+            if ($p->has('control') && $p->getString('control') == 'TEST') {
+                $mensaje = "Marca el checkbox para confirmar la operación";
+                $smarty->assign('mensaje', $mensaje);
+                $smarty->display('mensaje.tpl');
+            }
+        }
     }
-
     /** Controlador encargado de la operación "formlibro".
      * Muestra el formulario para la inserción de un nuevo libro.
      * @param Smarty $smarty Instancia de la clase Smarty.

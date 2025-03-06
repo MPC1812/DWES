@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-06 01:27:44
+/* Smarty version 4.5.5, created on 2025-03-06 02:39:46
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\borrarlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c8ec0027b0b5_62632817',
+  'unifunc' => 'content_67c8fce2ee5995_23788673',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f0f2e4e91d14a9c4d69b87a9d2fcd7f11ce25f5' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\borrarlibro.tpl',
-      1 => 1741220860,
+      1 => 1741225176,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c8ec0027b0b5_62632817 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c8fce2ee5995_23788673 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
