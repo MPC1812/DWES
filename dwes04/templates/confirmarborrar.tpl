@@ -28,40 +28,12 @@
     }
 </style>
 <form action="/dwes04/index.php?accion=borrar_libro_MPC" method="post">
-    <table border="1px solid blue">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>ISBN</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Año de publicación</th>
-                <th>Número de páginas</th>
-                <th>Ejemplares disponibles</th>
-                <th>Fecha de creación</th>
-                <th>Fecha de actualización</th>
-            </tr>
-        </thead>
-        <tbody>
-            {foreach $listadolibros as $libro}
-                <tr>
-                    <td>{$libro->getId()}</td>
-                    <td>{$libro->getIsbn()}</td>
-                    <td>{$libro->getTitulo()}</td>
-                    <td>{$libro->getAutor()}</td>
-                    <td>{$libro->getAnioPublicacion()}</td>
-                    <td>{$libro->getPaginas()}</td>
-                    <td>{$libro->getEjemplaresDisponibles()}</td>
-                    <td>{$libro->getFechaCreacion()}</td>
-                    <td>{$libro->getFechaActualizacion()}</td>
-                    <td>
-                        <input type="checkbox" name="checkboxborrar" value="checkboxborrar">
-                        <button type="submit" name="id" class="btn btn-dark btn-sm"
-                            value="{$libro->getId()}" >BORRAR</button>
-                    </td>
-                </tr>
-            {/foreach}
-        </tbody>
-    </table>
+<input type="checkbox" name="checkboxborrar" value="checkboxborrar">
+<button type="submit" name="accion" class="btn btn-dark btn-sm" value="confirmar">
+<input type="hidden" value="{$idborrar}" name="borrar">
+<input type="hidden" value="TEST" name="control">
+¿Está seguro de que desea borrar el libro?
+</button>
 </form>
-</html>
+    </form>
+    </html>

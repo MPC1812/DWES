@@ -6,6 +6,8 @@ use DWES04\Peticion as Peticion;
 use DWES04\modelo\Libro;
 use DWES04\modelo\Libros;
 
+use function PHPUnit\Framework\isEmpty;
+
 /**
  * Clase ControladorMPC.
  * Contiene los métodos de la clase ControladorMPC. Permite operar con los libros almacenados en la base de datos.
@@ -36,16 +38,14 @@ class ControladorMPC
         $smarty->display('barra.tpl');
         $listadolibros = Libros::listarMPC($pdo, $ordenar);
         $smarty->assign('listadolibros', $listadolibros);
+        //$smarty->display('mostrarLibros.tpl');
         if ($p->has('accion') && $p->getString('accion') === 'nuevo_libro_form_MPC') {
         } elseif ($p->has('accion') && $p->getString('accion') === 'borrar_libro_MPC') {
-            $smarty->display('borrarlibro.tpl');
-            if ($p->has('id') && $p->getString('id') != '') {
-                $smarty->display('confirmarborrar.tpl');
-            }
         } else {
             $smarty->display('mostrarLibros.tpl');
         }
     }
+
 
     /** Controlador encargado de la operación "borrarLibro".
      * Permite borrar un libro de la base de datos.
@@ -55,9 +55,38 @@ class ControladorMPC
      */
     public static function borrarLibro(Peticion $p, \Smarty $smarty, \PDO $pdo)
     {
-        if ($p->has('id') == false) return;
-        if ($p->has('id') && $p->has('checkboxborrar')) {
-            libro::borrar($pdo, $p->getString('id'));
+        $listadolibros = Libros::listarMPC($pdo, true);
+        $smarty->assign('listadolibros', $listadolibros);
+
+        if ($p->isGet() && $p->getString('accion') === 'borrar_libro_MPC') {
+            if (empty($listadolibros)) {
+                $mensaje = "No hay libros disponibles para borrar";
+                $smarty->assign('mensaje', $mensaje);
+                $smarty->display('mensaje.tpl');
+            } else {
+                $smarty->display('borrarlibro.tpl');
+            }
+        }
+        if ($p->isPost() && $p->getString('accion') === 'borrar_libro_MPC') {
+
+            $idborrar = $p->getString('borrar');
+            $smarty->assign('idborrar', $idborrar);
+            $smarty->display('confirmarborrar.tpl');
+        }
+
+        if (
+            $p->isPost() && $p->has('checkboxborrar') && $p->getString('checkboxborrar') === 'checkboxborrar'
+            && $p->has('borrar') && $p->getString('borrar') != '' && $p->getString('borrar') != null && $p->getString('control') == 'TEST'
+        ) {
+            if (libro::borrar($pdo, $p->getString('borrar'))) {
+                $mensaje = "Se ha borrado el libro con id " . $p->getString('borrar');
+                $smarty->assign('mensaje', $mensaje);
+                $smarty->display('mensaje.tpl');
+            } else {
+                $mensaje = "No se ha borrado ningún libro";
+                $smarty->assign('mensaje', $mensaje);
+                $smarty->display('mensaje.tpl');
+            }
         }
     }
 

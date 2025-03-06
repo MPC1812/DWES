@@ -45,6 +45,7 @@ if (!file_exists(__DIR__ . '/src/Peticion.php')) {
 $p=new Peticion();
 $ruta=$p->getPath();
 
+
 //Enrutado
 if ($ruta==='/dwes04/index.php')
 {
@@ -65,11 +66,11 @@ if (isset($_GET['accion'])) {
 {
     ControladorMPC::formlibro($smarty);
 }
-    if ($_GET['accion']==='crear_libro_MPC')
+    elseif ($_GET['accion']==='crear_libro_MPC')
 {
     ControladorMPC::guardarLibro($p,$smarty,$pdoConn);
 }
-    if ($_GET['accion']==='borrar_libro_MPC')
+    elseif ($_GET['accion']==='borrar_libro_MPC')
 {
     ControladorMPC::borrarLibro($p,$smarty,$pdoConn);
 }

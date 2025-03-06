@@ -43,6 +43,7 @@
             </tr>
         </thead>
         <tbody>
+
             {foreach $listadolibros as $libro}
                 <tr>
                     <td>{$libro->getId()}</td>
@@ -55,12 +56,15 @@
                     <td>{$libro->getFechaCreacion()}</td>
                     <td>{$libro->getFechaActualizacion()}</td>
                     <td>
-                        <button type="submit" name="id" class="btn btn-dark btn-sm"
-                            value="{$libro->getId()}" >BORRAR</button>
+                        <input type="hidden" value="{$a=$libro->getId()}">
+                        <button type="submit" name="borrar" class="btn btn-dark btn-sm" value="{$a}">Borrar
+                        </button>
                     </td>
                 </tr>
             {/foreach}
         </tbody>
     </table>
+    </button>
 </form>
+
 </html>

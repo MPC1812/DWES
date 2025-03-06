@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.5, created on 2025-03-03 22:16:39
+/* Smarty version 4.5.5, created on 2025-03-06 01:27:44
   from 'M:\00.Datos de Usuario\Documents\MEGA\01.DWES\htdocs\dwes\dwes04\templates\borrarlibro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.5',
-  'unifunc' => 'content_67c61c371956c0_19084853',
+  'unifunc' => 'content_67c8ec0027b0b5_62632817',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5f0f2e4e91d14a9c4d69b87a9d2fcd7f11ce25f5' => 
     array (
       0 => 'M:\\00.Datos de Usuario\\Documents\\MEGA\\01.DWES\\htdocs\\dwes\\dwes04\\templates\\borrarlibro.tpl',
-      1 => 1741036593,
+      1 => 1741220860,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67c61c371956c0_19084853 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67c8ec0027b0b5_62632817 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 
@@ -66,6 +66,7 @@ function content_67c61c371956c0_19084853 (Smarty_Internal_Template $_smarty_tpl)
             </tr>
         </thead>
         <tbody>
+
             <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listadolibros']->value, 'libro');
 $_smarty_tpl->tpl_vars['libro']->do_else = true;
@@ -92,9 +93,10 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
                     <td><?php echo $_smarty_tpl->tpl_vars['libro']->value->getFechaActualizacion();?>
 </td>
                     <td>
-                        <button type="submit" name="id" class="btn btn-dark btn-sm"
-                            value="<?php echo $_smarty_tpl->tpl_vars['libro']->value->getId();?>
-" >BORRAR</button>
+                        <input type="hidden" value="<?php $_smarty_tpl->_assignInScope('a', $_smarty_tpl->tpl_vars['libro']->value->getId());?>">
+                        <button type="submit" name="borrar" class="btn btn-dark btn-sm" value="<?php echo $_smarty_tpl->tpl_vars['a']->value;?>
+">Borrar
+                        </button>
                     </td>
                 </tr>
             <?php
@@ -102,6 +104,8 @@ $_smarty_tpl->tpl_vars['libro']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         </tbody>
     </table>
+    </button>
 </form>
+
 </html><?php }
 }
