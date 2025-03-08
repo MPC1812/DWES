@@ -1,0 +1,132 @@
+DWES05
+Iniciamos el proyecto
+	composer create-project laravel/laravel:~10 dwes05
+
+modificamos el archivo .env
+	DB_CONNECTION=mysql
+	DB_HOST=localhost
+	DB_PORT=3306
+	DB_DATABASE=2425_dwes05
+	DB_USERNAME=root
+	DB_PASSWORD=
+
+Creamos migración para crear la tabla "mascotas" con el código que se da a continuación
+	php artisan make:migration crear_tabla_mascota_virtual_MPC
+		return new class extends Migration
+		{
+			public function up(): void
+			{
+				Schema::create('mascotas', function (Blueprint $table) {
+					$table->id();
+					// Cada mascota pertenece a un usuario, si se borra el usuario o se actualiza su id, se actualiza en cascada
+					$table->unsignedBigInteger('user_id');
+					$table->foreign('user_id')->references('id')
+						->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+			
+					$table->timestamps();
+				});
+			}
+
+			public function down(): void
+			{
+				Schema::dropIfExists('mascotas');
+			}
+		};
+
+Ejecutamos las migraciones, se nos preguntará en el caso de no existir la BD "2425_dwes05" si queremos crearla, le decimos "yes"
+	php artisan migrate
+	
+Creamos una nueva migración para modificar la tabla "mascotas" con los siguientes datos
+	php artisan make:migration alter_tabla_mascota_virtual_MPC 
+		<?php
+
+		use Illuminate\Database\Migrations\Migration;
+		use Illuminate\Database\Schema\Blueprint;
+		use Illuminate\Support\Facades\Schema;
+
+		return new class extends Migration
+		{
+			/**
+			 * Run the migrations.
+			 */
+			public function up(): void
+			{
+				//Datos añadidos por nosotros
+				Schema::table('mascotas', function (Blueprint $table) {
+					$table->string('nombre',50);
+					$table->string('descripcion',250);
+					$table->enum('tipo',['Perro', 'Gato', 'Pájaro','Dragón','Conejo','Hamster','Tortuga','Pez','Serpiente']);
+					$table->enum('publica',['Si','No']);
+					$table->bigInteger('megusta')->default(0);
+				});
+			}
+
+			/**
+			 * Reverse the migrations.
+			 */
+			public function down(): void
+			{
+				//
+			}
+		};
+Creamos el modelo MascotaMPC con el código que se da a continuación
+	php artisan make:model MascotaMPC
+		<?php
+
+		namespace App\Models;
+
+		use Illuminate\Database\Eloquent\Factories\HasFactory;
+		use Illuminate\Database\Eloquent\Model;
+
+		class MascotaMPC extends Model
+		{
+			use HasFactory;
+
+			protected $table = 'mascotas';
+
+			protected $fillable = [
+				'nombre',
+				'descripcion',
+				'tipo',
+				'publica',
+				'megusta',
+				'user_id',
+			];
+
+			public function user(){
+				return $this->belongsTo(User::class);
+			}
+		}
+Modificamos el modelo App\Models\User para establecer la relación con MascotaMPC
+    public function mascotas()
+    {
+        return $this->hasMany(MascotaMPC::class);
+    }
+
+Probamos el modelo
+	php artisan tinker
+
+	use App\Models\User;
+	$user1 = User::create(['name' => 'user1', 'email' => 'user1@userland.dwes', 'password' => 'user1']);
+
+Si todo ha ido bien, deberíamos ver en la terminal que ha creado al usuario "user1" con el id 1. Vamos a probarlo.
+
+	$user1 = User::find(1);
+	//Obtenemos el usuario con el id 1
+	$user1->email_verified_at = now();
+	//Modificamos el email_verified_at a la fecha actual
+	$user1->save();
+	//Guardamos los cambios
+
+Ahora vamos a crear una nueva mascota
+	use App\Models\MascotaMPC;
+	$mascota = MascotaMPC::create(['nombre' => 'mascota MPC', 'descripcion' => 'Es un perrito', 'tipo' => 'Perro', 'publica' => 'Si', 'user_id' => 1]);
+	//Creamos una nueva mascota
+
+
+Ejecutamos las migraciones
+	php artisan migrate
+
+
+	
+	
