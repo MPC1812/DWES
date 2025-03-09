@@ -15,15 +15,22 @@
             padding: 5px;
             text-align: center;
         }
+        h3 {
+            text-align: left;
+            text-decoration: green wavy underline;
+            color: blue;
+        }
     </style>
 </head>
 <body>
     @auth
-    <H2>Bienvenido {{ Auth::user()->name}} a la página principal de la zona PRIVADA.</H2>
-        <A href="{{ route('zonapublica') }}">Ve a la zona pública</A><BR>
-        <A href="{{ route('logout') }}">Cierra sesión.</A></BR>
+    <h2>Bienvenido {{ Auth::user()->name}} a la página principal de la zona PRIVADA.</h2>
+        <a href="{{ route('zonapublica') }}">Ve a la zona pública</a><br>
+        <a href="{{ route('logout') }}">Cierra sesión.</a><br>
+        <h3>Mis mascotas</h3>
+        <a href="{{ route('formmascotaMPC') }}">Crear nueva mascota</a><br><br>
     @endauth
-
+    
     <table>
         <thead>
             <tr>

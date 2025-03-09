@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\MascotaMPC;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MascotaControllerMPC;
 
 //Ruta a la zona pública (simplemente accediendo a / vía GET)
 Route::get('/', function () {
@@ -23,7 +24,7 @@ Route::post('/login', [LoginController::class, 'loginMPC'])->name('login');
 Route::get('/logout', [LoginController::class, 'logoutMPC'])->name('logout');
 //Ruta a la zona pública (simplemente accediendo a / vía GET)
 Route::get('/', function () {
-    $mascotas = MascotaMPC::all(); //Obtener el listado de mascotas
+    $mascotas = MascotaMPC::where('publica', 'Si')->get(); //Obtener el listado de mascotas públicas
     return view('principal', ['mascotasMPC'=>$mascotas]);
 })->name('zonapublica');
 //Ruta a la zona privada (simplemente accediendo a /zonaprivada vía GET)
@@ -31,3 +32,7 @@ Route::get('/zonaprivada', function () {
     $mascotas = MascotaMPC::where('user_id', Auth::user()->id)->get(); //Obtener el listado de mascotas del usuario
     return view('privada.principal',['mascotasMPC' => $mascotas]);
 })->middleware('auth')->name('zonaprivada');
+//Ruta para mostrar el formulario de creación de mascotas
+Route::get('/mascota/nueva', [MascotaControllerMPC::class, 'mostrarFormularioCrearMascotaMPC'])->middleware('auth')->name('formmascotaMPC');
+//Ruta post donde se procesa el formulario de creación de mascotas
+Route::post('/mascota/nueva', [MascotaControllerMPC::class, 'postNuevaMascotaMPC'])->middleware('auth')->name('nuevamascotaMPC');

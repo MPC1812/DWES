@@ -412,4 +412,92 @@ y privada/principal.blade.php para mostrar los datos de las mascotas
 
 Ahora vamos a crear un controlador para crear mascotas
 	php artisan make:controller MascotaControllerMPC
-y modificamos el archivo App\Http\Controllers\MascotaControllerMPC.php con el siguiente código
+
+Creamos la plantilla blade que mostrará el formulario para crear mascotas
+	resources/views/privada/formmascotaMPC.blade.php
+		<!DOCTYPE html>
+		<html lang="es">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=100%, initial-scale=1.0">
+			<meta http-equiv="X-UA-Compatible" content="ie=edge">
+			<title>Formulario de creación de mascotas</title>
+		</head>
+		<body>
+			<h1>Formulario de creación de mascotas</h1>
+			@if ($errors->any())
+				<H3>Se han producido errores en el formulario:</H3>
+				<UL>
+					@foreach ($errors->all() as $error)
+						<LI>{{ $error }}</LI>
+					@endforeach
+				</UL>
+			@endif
+			<!-- Formulario de creación de mascotas -->
+			<form method="POST" action="{{ route('nuevamascotaMPC') }}">
+				@csrf
+				<label for="nombre">Nombre:</label>
+				<input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}"><BR>
+				<label for="descripcion">Descripción:</label>
+				<input type="text" id="descripcion" name="descripcion" value="{{ old('descripcion') }}"><BR>
+				<label for="tipo">Tipo:</label>
+				<select name="tipo" id="tipo">
+					<option value="Perro">Perro</option>
+					<option value="Gato">Gato</option>
+					<option value="Pájaro">Pájaro</option>
+					<option value="Dragón">Dragón</option>
+					<option value="Conejo">Conejo</option>
+					<option value="Hamster">Hamster</option>
+					<option value="Tortuga">Tortuga</option>
+					<option value="Pez">Pez</option>
+					<option value="Serpiente">Serpiente</option>
+				</select><BR>
+				<label for="publica">Publica:</label>
+				<select name="publica" id="publica">
+					<option value="Si">Si</option>
+					<option value="No">No</option>
+				</select><BR>
+				<input type="submit" value="Crear">
+			</form>
+		</body>
+		</html>
+
+Modificamos el archivo App\Http\Controllers\MascotaControllerMPC.php con el siguiente código
+	<?php
+
+	namespace App\Http\Controllers;
+
+	use Illuminate\Http\Request;
+	use App\Models\MascotaMPC;
+	use App\Models\User;
+
+	class MascotaControllerMPC extends Controller
+	{
+		// Mostrar formulario de creación de mascotas
+		public function mostrarFormularioCrearMascotaMPC()
+		{
+			return view('privada.formmascotaMPC');
+		}
+		// Crear mascota
+		public function nuevamascotaMPC(Request $request)
+		{
+			$nombre = $request->nombre;
+			$descripcion = $request->descripcion;
+			$tipo = $request->tipo;
+			$publica = $request->publica;
+			$user_id = Auth::user()->id;
+			$mascota = new MascotaMPC;
+			$mascota->nombre = $nombre;
+			$mascota->descripcion = $descripcion;
+			$mascota->tipo = $tipo;
+			$mascota->publica = $publica;
+			$mascota->user_id = $user_id;
+			$mascota->save();
+			return redirect()->route('zonaprivada');
+		}
+	}
+
+Creamos la ruta en el archivo routes\web.php para que use nuestro controlador de autenticación
+	//Ruta para mostrar el formulario de creación de mascotas
+	Route::get('/crearMascotaMPC', [MascotaControllerMPC::class, 'mostrarFormularioCrearMascotaMPC'])->name('mostrarFormularioCrearMascotaMPC');
+	
