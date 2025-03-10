@@ -25,7 +25,12 @@
         No estás autenticado, por favor ...
         <A href="{{ route('formlogin') }}">inicia sesión.</A><BR>
     @endguest
+    
+@extends('plantillas.plantpublica')
 
+@section('titulo', 'Inicio')
+
+@section('contenido')
     <table>
         <thead>
             <tr>
