@@ -6,44 +6,15 @@
     <meta name="viewport" content="width=100%, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ZONA PRIVADA</title>
-    <style>
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 5px;
-            text-align: center;
-        }
-
-        h3 {
-            text-align: left;
-            text-decoration: green wavy underline;
-            color: blue;
-        }
-    </style>
 </head>
 
 <body>
-    @auth
-    <h2>Bienvenido {{ Auth::user()->name}} a la página principal de la zona PRIVADA.</h2>
-    <a href="{{ route('zonapublica') }}">Ve a la zona pública</a><br>
-    <a href="{{ route('logout') }}">Cierra sesión.</a><br>
-    <h3>Mis mascotas</h3>
-    <a href="{{ route('formmascotaMPC') }}">Crear nueva mascota</a><br><br>
-    @endauth
-    @if ($errors->any())
-    <H3>Se han producido errores en el formulario:</H3>
-    <UL>
-        @foreach ($errors->all() as $error)
-        <LI>{{ $error }}</LI>
-        @endforeach
-    </UL>
-    @endif
+@extends('plantillas.plantprivada')
+
+@section('titulo', 'Inicio')
+
+@section('contenido')
+<h4>Mis mascotas</h4>
     <form method="post" action="{{ route('borrarmascotaMPC') }}">
         @csrf
         <table>
@@ -56,6 +27,7 @@
                     <th>Publica</th>
                     <th>#Me gustas</th>
                     <th>Propietario</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +49,7 @@
             </tbody>
         </table>
     </form>
+    @endsection
 </body>
 
 </html>

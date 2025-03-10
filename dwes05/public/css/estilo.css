@@ -12,7 +12,7 @@ body {
   }
   
   h1, nav, footer, nav {
-    text-align: center;
+    text-align: right;
   }
   
   footer {
@@ -24,3 +24,46 @@ body {
     color: blue;
     text-decoration: none;
   }
+
+.navbar {
+    background-color: #4CAF50;
+    overflow: hidden;
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+.navbar .main-page {
+    float: right;
+}
+.navbar a:hover {
+    background-color: #009879;
+    
+}
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
+thead {
+    background-color: #52e7c6; 
+}
+table tbody tr:nth-child(even){
+    background-color: #84ec87;
+}
+h3 {
+    text-align: center;
+}
+
+h4 {
+    text-align: left;
+    color: blue;
+}

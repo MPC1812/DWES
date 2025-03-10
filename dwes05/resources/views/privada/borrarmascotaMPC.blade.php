@@ -19,7 +19,13 @@
 </head>
 
 <body>
+@extends('plantillas.plantprivada')
+
+@section('titulo', 'Inicio')
+
+@section('contenido')
     <h1>Resultado de la creación de mascota</h1>
     <p>Se ha borrado la mascota con id {{$id}} by Mario Puerma Cortés</p>
+@endsection
 </body>
 </html>

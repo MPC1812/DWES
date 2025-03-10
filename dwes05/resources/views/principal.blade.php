@@ -5,27 +5,8 @@
     <meta name="viewport" content="width=100%, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Página principal</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
+</head>
 <body>
-    <H2>Bienvenido a la página principal PÚBLICA.</H2>
-    @auth
-        Estás autenticado, puedes ir a ...
-        <A href="{{ route('zonaprivada') }}">tu zona privada</A><BR>
-    @endauth
-    @guest
-        No estás autenticado, por favor ...
-        <A href="{{ route('formlogin') }}">inicia sesión.</A><BR>
-    @endguest
-    
 @extends('plantillas.plantpublica')
 
 @section('titulo', 'Inicio')
@@ -51,6 +32,6 @@
         @endforeach
         </tbody>
     </table>
-
+@endsection
 </body>
 </html>

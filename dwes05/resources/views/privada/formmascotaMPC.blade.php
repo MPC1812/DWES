@@ -9,7 +9,12 @@
 </head>
 
 <body>
-    <h1>Formulario de creación de mascotas</h1>
+@extends('plantillas.plantprivada')
+
+@section('titulo', 'Inicio')
+
+@section('contenido')
+    <h3>Formulario de creación de mascotas</h3>
     @if ($errors->any())
     <H3>Se han producido errores en el formulario:</H3>
     <UL>
@@ -18,6 +23,7 @@
         @endforeach
     </UL>
     @endif
+
     <!-- Formulario de creación de mascotas -->
         <form method="post" action="{{ route('nuevamascotaMPC') }}">
         @csrf
@@ -42,6 +48,7 @@
         <input type = "radio" name="publica" value="No">No<br>
         <br><input type="submit" value="Crear!">
     </form>
+    @endsection
 </body>
 
 </html>
