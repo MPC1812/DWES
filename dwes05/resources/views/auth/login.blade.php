@@ -6,6 +6,11 @@
 </head>
 
 <body>
+@extends('plantillas.plantprivada')
+
+@section('titulo', 'Inicio')
+
+@section('contenido')
     @auth
 
         <h1>Ya has iniciado sesión</h1>
@@ -37,7 +42,7 @@
         </form>
     @endguest
 
-
+@endsection
 </body>
 
 </html>

@@ -23,14 +23,6 @@
     <a href="{{ route('logout') }}">Cierra sesión.</a><br>
     <a href="{{ route('formmascotaMPC') }}">Crear nueva mascota</a><br>
     @endauth
-    @if ($errors->any())
-    <H3>Se han producido errores en el formulario:</H3>
-    <UL>
-        @foreach ($errors->all() as $error)
-        <LI>{{ $error }}</LI>
-        @endforeach
-    </UL>
-    @endif
 
     <br>@yield('contenido')
 
