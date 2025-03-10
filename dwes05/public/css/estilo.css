@@ -28,7 +28,8 @@ body {
 
 .navbar {
     /* background-image: url("../fondoPrivado.jpg"); */
-    background-color: #4CAF50;
+    background: linear-gradient(30deg, rgba(154,247,107,1) 0%, rgba(35,121,9,1) 50%, rgba(101,226,17,1) 100%);
+    /* background-color: #4CAF50; */
     overflow: hidden;
 }
 .navbar a {
