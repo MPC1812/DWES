@@ -27,6 +27,7 @@ body {
   }
 
 .navbar {
+    /* background-image: url("../fondoPrivado.jpg"); */
     background-color: #4CAF50;
     overflow: hidden;
 }
