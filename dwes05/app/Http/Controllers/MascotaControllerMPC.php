@@ -30,18 +30,18 @@ class MascotaControllerMPC extends Controller
             'tipo.required' => 'El tipo es obligatorio y debe ser uno de los que aparecen en la lista',
         ];
         $datosvalidados = $request->validate($rules, $customMessages);
-        $nombre = $request->nombre;
-        $descripcion = $request->descripcion;
-        $tipo = $request->tipo;
-        $publica = $request->publica;
-        $user_id = auth()->id();
-        //$user_id = Auth::user()->id;
+        // $nombre = $request->nombre;
+        // $descripcion = $request->descripcion;
+        // $tipo = $request->tipo;
+        // $publica = $request->publica;
+        // $user_id = auth()->id();
+        // //$user_id = Auth::user()->id;
         $mascota = new MascotaMPC;
-        $mascota->nombre = $nombre;
-        $mascota->descripcion = $descripcion;
-        $mascota->tipo = $tipo;
-        $mascota->publica = $publica;
-        $mascota->user_id = $user_id;
+        $mascota->nombre = $request->nombre;
+        $mascota->descripcion = $request->descripcion;
+        $mascota->tipo = $request->tipo;
+        $mascota->publica = $request->publica;
+        $mascota->user_id = auth()->id();
         $mascota->save();
         return view('privada.guardarMascotaMPC', ['mascota' => $mascota]);
     }
