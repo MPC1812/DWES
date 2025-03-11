@@ -32,9 +32,22 @@ Route::get('/zonaprivada', function () {
     $mascotas = MascotaMPC::where('user_id', Auth::user()->id)->get(); //Obtener el listado de mascotas del usuario
     return view('privada.principal',['mascotasMPC' => $mascotas]);
 })->middleware('auth')->name('zonaprivada');
+
+route::controller(MascotaControllerMPC::class)->middleware('auth')->group(function () {
+    //Ruta para mostrar el formulario de creación de mascotas
+    Route::get('/mascota/nueva', [MascotaControllerMPC::class, 'mostrarFormularioCrearMascotaMPC'])->name('formmascotaMPC');
+    //Ruta post donde se procesa el formulario de creación de mascotas
+    Route::post('/mascota/nueva', [MascotaControllerMPC::class, 'postNuevaMascotaMPC'])->name('nuevamascotaMPC');
+    //Ruta post para borrar mascotas
+    Route::post('/mascota/borrar', [MascotaControllerMPC::class, 'postBorrarMascotaMPC'])->name('borrarmascotaMPC');
+});
+
+/* 
+Otra forma de hacer lo anterior
 //Ruta para mostrar el formulario de creación de mascotas
 Route::get('/mascota/nueva', [MascotaControllerMPC::class, 'mostrarFormularioCrearMascotaMPC'])->middleware('auth')->name('formmascotaMPC');
 //Ruta post donde se procesa el formulario de creación de mascotas
 Route::post('/mascota/nueva', [MascotaControllerMPC::class, 'postNuevaMascotaMPC'])->middleware('auth')->name('nuevamascotaMPC');
 //Ruta post para borrar mascotas
 Route::post('/mascota/borrar', [MascotaControllerMPC::class, 'postBorrarMascotaMPC'])->middleware('auth')->name('borrarmascotaMPC');
+*/
