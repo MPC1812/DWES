@@ -6,15 +6,19 @@ use App\Models\MascotaMPC;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MascotaControllerMPC;
 
+/* BORRAR NO ES NECESARIO, TENEMOS OTRA ROUTE::GET('/', function () {....
 //Ruta a la zona pública (simplemente accediendo a / vía GET)
 Route::get('/', function () {
     return view('principal');
 })->name('zonapublica');
 
+
 //Ruta a la zona privada (simplemente accediendo a /zonaprivada vía GET)
 Route::get('/zonaprivada', function () {
     return view('privada.principal');
 })->middleware('auth')->name('zonaprivada');
+
+*/
 
 //Creamos una ruta nombrada (formlogin) tipo GET a '/login' que mostrará el formulario
 Route::get('/login', [LoginController::class, 'mostrarFormularioLoginMPC'])->name('formlogin');

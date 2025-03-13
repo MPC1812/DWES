@@ -49,7 +49,7 @@ class MascotaControllerMPC extends Controller
     public function postBorrarMascotaMPC(Request $request)
     {
         $datosvalidados = $request->validate([
-            'id' => 'required|string|max:50',
+            'id' => 'required|numeric',
         ]);
         $id = $request->id;
         $mascota = MascotaMPC::find($id);
