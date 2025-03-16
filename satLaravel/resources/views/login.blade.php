@@ -12,7 +12,7 @@
 <h2>Bienvenido {{ Auth::user()->name}}</h2>
 <a href="{{ route('dashboard') }}"></a>
 @else
-<h2>Formulario de Acceso</h2>
+<h2 class="text-center bg-success text-white">Bienvenido</h2>
   <div class="imgcontainer">
     <img src="img/avatar.png" alt="Logo Empresa" class="avatar">
   </div>
