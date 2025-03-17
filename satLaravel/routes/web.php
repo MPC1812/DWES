@@ -27,8 +27,6 @@ route::controller(AuthController::class)->middleware('auth')->group(function () 
     Route::post('/register', [AuthController::class, 'guardarNuevoUsuario']);
     Route::get('/logout', [AuthController::class, 'destroy']);
 
-    Route::get('/newJob', [AuthController::class, 'newJob']->name('nuevoParte'));
-    Route::get('/newJob', [AuthController::class, 'newJob']->name('nuevoParte'));
 });
 
 
