@@ -18,12 +18,26 @@ if (isset($_SESSION['token'])) {
     switch ($code) {
         case 200:
             unset($_SESSION['token']);
-            echo "Has cerrado sesión correctamente";
+            $mensaje = "Has cerrado sesión correctamente";
             break;
         case 401:
-            echo "Error 401: Acceso no autorizado";
+            $mensaje = "Error 401: Acceso no autorizado";
             break;
         default:
-            echo "Revisa el código de respuesta del servidor";
+            $mensaje = "Revisa el código de respuesta del servidor";
     }
-} else echo "No hay ninguna sesión abierta";
+} else $mensaje = "No hay ninguna sesión abierta";
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+</head>
+
+<body>
+    <h3><?php echo $mensaje; ?></h3>
+</body>

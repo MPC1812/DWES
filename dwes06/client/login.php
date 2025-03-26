@@ -1,45 +1,39 @@
 <?php
 
-use function Laravel\Prompts\clear;
-
 require 'vendor/autoload.php';
 
 $url = "http://127.0.0.1:8080/api/login";
 session_start();
 
 if ($_POST) {
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $email = trim($_POST['email']);
+    $pass = trim($_POST['pass']);
     $guzzleClient = new GuzzleHttp\Client(['http_errors' => false]);
     $datos = ["email" => $email, "password" => $pass];
     $response = $guzzleClient->post($url, ['form_params' => $datos]);
     $code = $response->getStatusCode(); //Obtener el código de respuesta HTTP
     $body = $response->getBody();
     $body = json_decode($body, true);
-    //$body = $response->getBody()->getContents(); //Obtener el contenido del cuerpo del mensaje
 
 
     switch ($code) {
         case 200:
             $token = $body['token'];
-            //$token = (substr($body,37, -2));
             $_SESSION['token'] = $token;
-            echo "Usuario logueado correctamente";
-            clear();
+            $mensaje = "Usuario logueado correctamente";
             break;
         case 422:
-            echo "Error 422: Email o password no proporcionados o no válidos";
+            $mensaje = "Error 422: Email o password no proporcionados o no válidos";
             break;
         case 401:
-            echo "Error 401: Credenciales no válidas";
+            $mensaje = "Error 401: Credenciales no válidas";
             break;
         default:
-            echo "Usuario o contraseñas incorrectos";
+            $mensaje = "Usuario o contraseñas incorrectos";
     }
 } else if (isset($_SESSION['token'])) {
-    echo "Usuario logueado correctamente";
-    clear();
-} else echo "Rellena el formulario";
+   $mensaje = "Usuario logueado correctamente";
+} else $mensaje = "";  //Aquí podríamos mostrar un mensaje de error tipo "Rellena el formulario"
 
 ?>
 <!DOCTYPE html>
@@ -52,6 +46,8 @@ if ($_POST) {
 </head>
 
 <body>
+<?php if (!$_POST && !isset($_SESSION['token'])) { ?>
+    <h1 class="container">Login</h1>
     <form action="login.php" method="post">
 
         <div class="container">
@@ -65,10 +61,12 @@ if ($_POST) {
         </div>
 
     </form>
-    <style>
+    <?php } ?>
+    <h3><?php echo $mensaje; ?></h3>
+</body>
+<style>
         .container {
             width: 200px;
-            margin: 0 auto;
             text-align: center;
         }
 
@@ -101,8 +99,4 @@ if ($_POST) {
             background-color: #45a049;
         }
     </style>
-
-
-</body>
-
 </html>

@@ -53,7 +53,7 @@ class MPCSeeder extends Seeder
             $mascota3 = MascotaMPC::create([
                 'nombre' => 'mascota MPC03',
                 'descripcion' => 'Es un conejo',
-                'tipo' => 'Serpiente',
+                'tipo' => 'Conejo',
                 'publica' => 'No',
                 'user_id' => $userMPC1->id,
             ]);
