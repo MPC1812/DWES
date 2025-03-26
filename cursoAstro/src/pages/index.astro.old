@@ -1,0 +1,9 @@
+---
+const title = "Mi proyecto en Astro!!!";
+const color = "warning";
+
+const hobbies = ["Programar", "Leer", "Escribir", "Ver peliculas"];
+
+const isActive = true;
+---
+

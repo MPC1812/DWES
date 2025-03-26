@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Container\Attributes\Auth;
 
 Route::get('/about', function () {
@@ -26,6 +27,17 @@ route::controller(AuthController::class)->middleware('auth')->group(function () 
     });
     Route::post('/register', [AuthController::class, 'guardarNuevoUsuario']);
     Route::get('/logout', [AuthController::class, 'destroy']);
+
+    Route::get('/nuevoparte', function(){
+        return view('partes.nuevousuario');
+    });
+
+    Route::post('/nuevoequipo', function(){
+        return view('partes.nuevoequipo');
+    });
+
+    Route::post('/nuevousuario', [ClienteController::class, 'validarUsuario'])->name('nuevousuario');
+    // Route::post('/nuevoequipo', [ClienteController::class, 'validarEquipo'])->name('nuevoequipo');
 
 });
 

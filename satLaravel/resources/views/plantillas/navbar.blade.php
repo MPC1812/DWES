@@ -12,11 +12,10 @@
   @if(Auth::check())
   <spam class="d-flex flex-row me-auto">
   <li><a class="active" href="/dashboard">Dashboard</a></li>
-  <li><a href="/registroEntrada">Registro de Entrada</a></li>
-  <li><a href="/newParte">Nuevo Parte</a></li>
-  <li><a href="/editParte">Editar Parte</a></li>
-  <li><a href="/deleteParte">Eliminar Parte</a></li>
-  <li><a href="/showParte">Ver Parte</a></li>
+  <li><a href="/nuevoparte">Nuevo Parte</a></li>
+  <li><a href="/editarparte">Editar Parte</a></li>
+  <li><a href="/eliminarparte">Eliminar Parte</a></li>
+  <li><a href="/mostrarparte">Mostrar Parte</a></li>
   </spam>
   <spam class="d-flex flex-row-reverse">
   <li><a href="/logout">Cerrar Sesión</a></li>

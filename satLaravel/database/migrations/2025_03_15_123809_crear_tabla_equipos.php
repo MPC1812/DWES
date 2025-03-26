@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['pc', 'portátil', 'tablet', 'móvil', 'otro'])->default('pc');
+            $table->enum('tipo', ['PC', 'Portátil', 'Tablet', 'Móvil', 'Otro'])->default('pc');
             $table->string('marca');
             $table->string('modelo')->nullable();
             $table->enum('cargador', ['Si', 'No'])->nullable();
