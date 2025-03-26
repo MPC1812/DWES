@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 //Clase que necesitamos para la autenticación (Controlador que hemos creado)
-use App\Http\Controllers\ApiXYZ\Auth\LoginController;
+use App\Http\Controllers\ApiMPC\Auth\LoginController;
+use App\Http\Controllers\ApiMPC\MPCMascotasControllerAPI as listarMascotas;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,7 @@ Route::post('/login', [LoginController::class,'doLogin']);
  *  http://localhost:.../api/logout
  */
 Route::any('/logout', [LoginController::class,'doLogout'])->middleware('auth:sanctum');
+
+Route::get('/mascotasMPC', [listarMascotas::class,'listarMascotasMPC'])->middleware('auth:sanctum');
+
 
