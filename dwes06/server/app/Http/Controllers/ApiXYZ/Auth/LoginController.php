@@ -4,6 +4,11 @@ namespace App\Http\Controllers\ApiXYZ\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+//Clases que necesitamos para que funcione el controlador
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
@@ -11,7 +16,7 @@ class LoginController extends Controller
     public function doLogin(Request $request):JsonResponse
     {
         //Creamos un validador
-        $validator=Validator::make($request->only(['email','password']), [
+        $validator = Validator::make($request->only(['email','password']), [
             'email' => 'required|email',
             'password' => 'required',
         ]);

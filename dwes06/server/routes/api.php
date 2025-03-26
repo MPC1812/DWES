@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiController\LoginController;
+//Clase que necesitamos para la autenticación (Controlador que hemos creado)
+use App\Http\Controllers\ApiXYZ\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
