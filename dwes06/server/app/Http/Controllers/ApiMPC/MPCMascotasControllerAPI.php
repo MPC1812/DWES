@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isNull;
 
 class MPCMascotasControllerAPI extends Controller
 {
@@ -64,6 +65,26 @@ class MPCMascotasControllerAPI extends Controller
         $mascota->publica = $request->publica;
         $mascota->user_id = auth()->id();
         $mascota->save();
-        return response()->json(['id_mascota' => $mascota->id, 'implementador'=>auth()->user()->name]);
+        return response()->json(['id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+    }
+
+    public function cambiarMascotaXYZ(int $mascota, Request $request)
+    {
+        $mascota = MascotaMPC::find($mascota);
+        if (isNull($mascota)) {
+            return response()->json('Data not found', 404);
+        } elseif ($mascota->user_id != auth()->id()) {
+            return response()->json('No tienes permisos para realizar esta acción', 403);
+        } elseif ($mascota->user_id == auth()->id()) {
+            //FALTA TRATAR EL JSON RECIBIDO Y MODIFICAR LA MASCOTA
+            $mascota->nombre = $request->nombre;
+            $mascota->descripcion = $request->descripcion;
+            $mascota->tipo = $request->tipo;
+            $mascota->publica = $request->publica;
+            $mascota->save();
+            return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+        } else {
+            return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+        }
     }
 }
