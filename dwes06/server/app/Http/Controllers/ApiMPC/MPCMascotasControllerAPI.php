@@ -68,23 +68,31 @@ class MPCMascotasControllerAPI extends Controller
         return response()->json(['id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
     }
 
-    public function cambiarMascotaXYZ(int $mascota, Request $request)
+    public function modificarMascotaMPC(int $mascota, Request $request)
     {
         if ($request -> isJson()) {
         $request->json()->all();
         $mascota = MascotaMPC::find($mascota);
-        if (isNull($mascota)) {
-            return response()->json('Data not found', 404);
+        if (is_null($mascota)) {
+            return response()->json('Mascota no encontrada', 404);
         } elseif ($mascota->user_id != auth()->id()) {
             return response()->json('No tienes permisos para realizar esta acción', 403);
         } elseif ($mascota->user_id == auth()->id()) {
-            //FALTA TRATAR EL JSON RECIBIDO Y MODIFICAR LA MASCOTA
-            $mascota->nombre = $request->nombre;
-            $mascota->descripcion = $request->descripcion;
-            $mascota->tipo = $request->tipo;
-            $mascota->publica = $request->publica;
-            $mascota->save();
-            return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+            $cambios = 0;
+            if (isset($request->descripcion) && $request->descripcion != $mascota->descripcion) {
+                $mascota->descripcion = $request->descripcion;
+                $cambios++;
+            }
+            if (isset($request->publica) && $request->publica != $mascota->publica) {
+                $mascota->publica = $request->publica;
+                $cambios++;
+            }
+            if ($cambios>0) {
+                $mascota->save();
+                return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+            } else {
+                return response()->json(['mensaje' => 'No se han realizado cambios'], 200);
+            }
         } else {
             return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
         }
@@ -93,18 +101,18 @@ class MPCMascotasControllerAPI extends Controller
     }
     }
 
-    public function eliminarMascotaXYZ(int $mascota)
+    public function eliminarMascotaMPC(int $mascota)
     {
         $mascota = MascotaMPC::find($mascota);
-        if (isNull($mascota)) {
-            return response()->json('Data not found', 404);
+        if (is_null($mascota)) {
+            return response()->json('Mascota no encontrada', 404);
         } elseif ($mascota->user_id != auth()->id()) {
             return response()->json('No tienes permisos para realizar esta acción', 403);
         } elseif ($mascota->user_id == auth()->id()) {
             $mascota->delete();
             return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
         } else {
-            return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+            return response()->json(['mensaje' => 'No se pudo eliminar la mascota', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
         }
     }
 }
