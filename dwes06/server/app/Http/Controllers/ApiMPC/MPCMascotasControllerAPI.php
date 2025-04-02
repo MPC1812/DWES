@@ -70,6 +70,8 @@ class MPCMascotasControllerAPI extends Controller
 
     public function cambiarMascotaXYZ(int $mascota, Request $request)
     {
+        if ($request -> isJson()) {
+        $request->json()->all();
         $mascota = MascotaMPC::find($mascota);
         if (isNull($mascota)) {
             return response()->json('Data not found', 404);
@@ -83,6 +85,24 @@ class MPCMascotasControllerAPI extends Controller
             $mascota->publica = $request->publica;
             $mascota->save();
             return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+        } else {
+            return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+        }
+    } else {
+        return response()->json('Datos recibidos incorrectos, se esperaba un JSON', 400);
+    }
+    }
+
+    public function eliminarMascotaXYZ(int $mascota)
+    {
+        $mascota = MascotaMPC::find($mascota);
+        if (isNull($mascota)) {
+            return response()->json('Data not found', 404);
+        } elseif ($mascota->user_id != auth()->id()) {
+            return response()->json('No tienes permisos para realizar esta acción', 403);
+        } elseif ($mascota->user_id == auth()->id()) {
+            $mascota->delete();
+            return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
         } else {
             return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
         }
