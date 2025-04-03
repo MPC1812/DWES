@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ session_start();
 
 <body>
     <?php if (!isset($_SESSION['token'])) { ?>
-        <p><?php echo $mensaje; ?></p>
+        <p>Debe iniciar sesión para acceder a esta página</p>
         <p><a href='login.php'>Iniciar sesión</a></p>
     <?php } ?>
     <?php if (isset($_SESSION['token'])){ ?>
@@ -21,7 +22,7 @@ session_start();
             <label for="id">ID:</label>
             <input type="text" name="id" id="id" required>
             <label for="descripcion">Descripción:</label>
-            <input type="text" name="descripcion" id="descripcion" required>
+            <input type="textarea" name="descripcion" id="descripcion" required>
             <label for="publica">Pública:</label>
             <select name="publica" id="publica" required>
                 <option value="Si">Si</option>
