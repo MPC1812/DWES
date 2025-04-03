@@ -43,7 +43,7 @@ Route::any('/logout', [LoginController::class,'doLogout'])->middleware('auth:san
 Route::get('/mascotasMPC', [apiController::class,'listarMascotasMPC'])->middleware('auth:sanctum');
 Route::post('/crearmascotaMPC', [apiController::class,'crearmascotaMPC'])->middleware('auth:sanctum');
 Route::put('/mascotasMPC/{mascota}', [apiController::class,'cambiarMascotaMPC'])->middleware('auth:sanctum');
-Route::delete('/eliminarmascotaMPC/{mascota}', [apiController::class,'eliminarMascotaMPC'])->middleware('auth:sanctum');
+Route::delete('/mascotasMPC/{mascota}', [apiController::class,'destroy'])->middleware('auth:sanctum');
 
 
 

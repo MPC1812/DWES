@@ -101,18 +101,18 @@ class MPCMascotasControllerAPI extends Controller
     }
     }
 
-    public function eliminarMascotaMPC(int $mascota)
+    public function destroy($mascota)
     {
         $mascota = MascotaMPC::find($mascota);
-        if (is_null($mascota)) {
-            return response()->json('Mascota no encontrada', 404);
-        } elseif ($mascota->user_id != auth()->id()) {
-            return response()->json('No tienes permisos para realizar esta acción', 403);
+        if (is_null($mascota) || $mascota->user_id != auth()->id()) {
+            return response()->json('No tienes permisos para realizar esta acción o no existe la mascota', 401);
         } elseif ($mascota->user_id == auth()->id()) {
             $mascota->delete();
-            return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
-        } else {
-            return response()->json(['mensaje' => 'No se pudo eliminar la mascota', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+            return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name], 200);
+        } elseif (!is_integer($mascota)) {
+            return response()->json('No se ha introducido un ID válido', 400);
+        }else {
+            return response()->json(['mensaje' => 'Error desconocido'], 500);
         }
     }
 }
