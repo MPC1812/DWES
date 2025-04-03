@@ -68,7 +68,7 @@ class MPCMascotasControllerAPI extends Controller
         return response()->json(['id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
     }
 
-    public function modificarMascotaMPC(int $mascota, Request $request)
+    public function cambiarMascotaMPC(int $mascota, Request $request)
     {
         if ($request -> isJson()) {
         $request->json()->all();
