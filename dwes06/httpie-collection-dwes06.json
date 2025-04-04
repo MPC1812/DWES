@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "format": "httpie",
+    "version": "1.0.0",
+    "contentType": "collection",
+    "schema": "https://schema.httpie.io/1.0.0.json",
+    "docs": "https://httpie.io/r/help/export-from-httpie",
+    "source": "HTTPie Desktop 2025.2.0"
+  },
+  "entry": {
+    "name": "DWES06",
+    "icon": {
+      "name": "globe",
+      "color": "red"
+    },
+    "auth": {
+      "type": "none"
+    },
+    "requests": [
+      {
+        "name": "",
+        "url": "127.0.0.1:8080/api/eliminarmascotaMPC/10",
+        "method": "PUT",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": "69|7TqBEpCtAYm6Rs0Ds0OYwi2l9UZ7UENSk9yeDyA63d7dfa48"
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "{\n  \"descripcion\": \"Es una serpiente\"\n}",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "",
+        "url": "http://127.0.0.1:8080/api/crearmascotaMPC",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": "63|wIuXl18CJBeuCfBzQC3uvjuneqbmQzwtzAdGN8zu2fe1584f"
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": [
+              {
+                "name": "nombre",
+                "value": "Linda3",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "descripcion",
+                "value": "prueba",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "tipo",
+                "value": "Perross",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "publica",
+                "value": "No lo se",
+                "enabled": true,
+                "type": "text"
+              }
+            ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "",
+        "url": "http://127.0.0.1:8080/api/login",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": ""
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": [
+              {
+                "name": "email",
+                "value": "MPC1@email.MPC",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "password",
+                "value": "MPC1",
+                "enabled": true,
+                "type": "text"
+              }
+            ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "",
+        "url": "http://127.0.0.1:8080/api/logout",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [
+          {
+            "name": "email",
+            "value": "MPC1@email.MPC",
+            "enabled": false
+          },
+          {
+            "name": "password",
+            "value": "MPC1",
+            "enabled": false
+          }
+        ],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": ""
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "",
+        "url": "http://127.0.0.1:8080/api/mascotasMPC",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": "51|aGct3QVlr1U0ayKajHXcSWkTHQ1wrWjJS1XlpBhr19465a3b"
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "",
+        "url": "127.0.0.1:8080/api/eliminarmascotaMPC/10",
+        "method": "DELETE",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "bearer",
+          "credentials": {
+            "username": "",
+            "password": "69|7TqBEpCtAYm6Rs0Ds0OYwi2l9UZ7UENSk9yeDyA63d7dfa48"
+          },
+          "target": "headers"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      }
+    ]
+  }
+}
