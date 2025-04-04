@@ -33,6 +33,7 @@ if ($_POST) {
     }
 } else if (isset($_SESSION['token'])) {
    $mensaje = "Usuario logueado correctamente";
+   header("Location: mascotas.php");
 } else $mensaje = "";  //Aquí podríamos mostrar un mensaje de error tipo "Rellena el formulario"
 
 ?>

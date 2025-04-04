@@ -90,27 +90,4 @@ if ($_POST) {
         <p><a href='login.php'>Iniciar sesión</a></p>
     <?php } ?>
 </body>
-<style>
-    body {
-        background-color: rgb(255, 255, 255);
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    th {
-        background-color: rgb(98, 186, 98);
-        color: rgb(255, 255, 255);
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    td {
-        background-color: rgb(255, 255, 0);
-        padding: 10px;
-        text-align: center;
-    }
-</style>
-
 </html>

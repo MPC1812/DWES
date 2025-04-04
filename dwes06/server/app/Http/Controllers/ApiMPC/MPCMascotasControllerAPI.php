@@ -70,49 +70,53 @@ class MPCMascotasControllerAPI extends Controller
 
     public function cambiarMascotaMPC(int $mascota, Request $request)
     {
-        if ($request -> isJson()) {
-        $request->json()->all();
-        $mascota = MascotaMPC::find($mascota);
-        if (is_null($mascota)) {
-            return response()->json('Mascota no encontrada', 404);
-        } elseif ($mascota->user_id != auth()->id()) {
-            return response()->json('No tienes permisos para realizar esta acción', 403);
-        } elseif ($mascota->user_id == auth()->id()) {
-            $cambios = 0;
-            if (isset($request->descripcion) && $request->descripcion != $mascota->descripcion) {
-                $mascota->descripcion = $request->descripcion;
-                $cambios++;
-            }
-            if (isset($request->publica) && $request->publica != $mascota->publica) {
-                $mascota->publica = $request->publica;
-                $cambios++;
-            }
-            if ($cambios>0) {
-                $mascota->save();
-                return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+        if ($request->isJson()) {
+            $request->json()->all();
+            $mascota = MascotaMPC::find($mascota);
+            if (is_null($mascota)) {
+                return response()->json('Mascota no encontrada', 404);
+            } elseif ($mascota->user_id != auth()->id()) {
+                return response()->json('No tienes permisos para realizar esta acción', 403);
+            } elseif ($mascota->user_id == auth()->id()) {
+                $cambios = 0;
+                if (isset($request->descripcion) && $request->descripcion != $mascota->descripcion) {
+                    $mascota->descripcion = $request->descripcion;
+                    $cambios++;
+                }
+                if (isset($request->publica) && $request->publica != $mascota->publica) {
+                    $mascota->publica = $request->publica;
+                    $cambios++;
+                }
+                if ($cambios > 0) {
+                    $mascota->save();
+                    return response()->json(['mensaje' => 'Cambio realizado', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+                } else {
+                    return response()->json(['mensaje' => 'No se han realizado cambios'], 200);
+                }
             } else {
-                return response()->json(['mensaje' => 'No se han realizado cambios'], 200);
+                return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
             }
         } else {
-            return response()->json(['mensaje' => 'No se pudo realizar el cambio', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name]);
+            return response()->json('Datos recibidos incorrectos, se esperaba un JSON', 400);
         }
-    } else {
-        return response()->json('Datos recibidos incorrectos, se esperaba un JSON', 400);
-    }
     }
 
     public function destroy($mascota)
     {
-        $mascota = MascotaMPC::find($mascota);
-        if (is_null($mascota) || $mascota->user_id != auth()->id()) {
-            return response()->json('No tienes permisos para realizar esta acción o no existe la mascota', 401);
-        } elseif ($mascota->user_id == auth()->id()) {
-            $mascota->delete();
-            return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name], 200);
-        } elseif (!is_integer($mascota)) {
-            return response()->json('No se ha introducido un ID válido', 400);
-        }else {
-            return response()->json(['mensaje' => 'Error desconocido'], 500);
+        if ($mascota ==null && !is_integer($mascota)) {
+            return response()->json(['mensaje' => 'No se ha introducido un ID válido'], 400);
+        } elseif ($mascota == null && is_integer($mascota)) {
+            return response()->json('No tienes permisos para realizar esta acción o no existe la mascota', 200);
+        } elseif ($mascota != null && is_integer($mascota)) {
+            $mascota = MascotaMPC::find($mascota);
+            if ($mascota->user_id == auth()->id()) {
+                $mascota->delete();
+                return response()->json(['mensaje' => 'Eliminación realizada', 'id_mascota' => $mascota->id, 'implementador' => auth()->user()->name], 200);
+            } else {
+                return response()->json('No tienes permisos para realizar esta acción o no existe la mascota', 200);
+            }
+        } else {
+            return response()->json(['mensaje' => 'Error desconocido'],500);
         }
     }
 }

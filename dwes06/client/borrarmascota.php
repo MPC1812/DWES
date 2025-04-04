@@ -19,19 +19,15 @@ if($_POST){
 
     switch ($code) {
         case 200:
-            $mensaje = "Código ".$code." : Borrado correctamente";
+            $mensaje = "Código ".$code." : Petición realizada correctamente";
             break;
-        case 401:
-            $mensaje = "Error ".$code." : Solicitud incorrecta";
-            break;
-        case 403:
-            $mensaje = "Error ".$code." : Credenciales no válidas";
-            break;
-        case 404:
-            $mensaje = "Error ".$code." : Mascota no encontrada";
+        case 400:
+            var_dump($mascota);
+            $mensaje = "Error ".$code." : No se ha introducido un número";
             break;
         default:
-            $mensaje = "Error ".$code." : Código de error desconocido";
+        var_dump($mascota);
+            $mensaje = "Error ".$code." : Revise el código de error";
     } 
 } else $mensaje = null;  //Aquí podríamos mostrar un mensaje de error tipo "Rellena y envía el formulario"
 ?>

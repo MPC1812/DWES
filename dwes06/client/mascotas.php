@@ -15,20 +15,6 @@ if (isset($_SESSION['token'])) {
     $code = $response->getStatusCode(); //Obtener el código de respuesta HTTP
     $body = $response->getBody()->getContents(); //Obtener el contenido cuerpo del mensaje
     $body = json_decode($body, true);
-
-    // switch ($code) {
-    //     case 200:
-    //         echo "Conexión realizada correctamente";
-    //         echo "<pre>";
-    //         print_r($body);
-    //         echo "</pre>";
-    //         break;
-    //     case 401:
-    //         echo "Error 401: Acceso no autorizado";
-    //         break;
-    //     default:
-    //         echo "Revisa el código de respuesta del servidor";
-    // }
 } else {
     $mensaje = "No hay ninguna sesión abierta, por favor, inicie sesión";
 }
@@ -65,7 +51,6 @@ if (isset($_SESSION['token'])) {
                         <td><?php echo $mascota['tipo']; ?></td>
                         <td><?php echo $mascota['megustas']; ?></td>
                     </tr>
-
                 <?php } ?>
             </tbody>
         </table>
@@ -79,17 +64,20 @@ if (isset($_SESSION['token'])) {
     body {
         background-color: rgb(255, 255, 255);
     }
+
     table {
         border-collapse: collapse;
     }
+
     th {
-        background-color:rgb(98, 186, 98);
+        background-color: rgb(98, 186, 98);
         color: rgb(255, 255, 255);
         padding: 10px;
         border-radius: 10px;
     }
+
     td {
-        background-color:rgb(255, 255, 0);
+        background-color: rgb(255, 255, 0);
         padding: 10px;
         text-align: center;
     }
