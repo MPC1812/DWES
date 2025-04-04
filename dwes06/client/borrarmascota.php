@@ -22,11 +22,9 @@ if($_POST){
             $mensaje = "Código ".$code." : Petición realizada correctamente";
             break;
         case 400:
-            var_dump($mascota);
             $mensaje = "Error ".$code." : No se ha introducido un número";
             break;
         default:
-        var_dump($mascota);
             $mensaje = "Error ".$code." : Revise el código de error";
     } 
 } else $mensaje = null;  //Aquí podríamos mostrar un mensaje de error tipo "Rellena y envía el formulario"
@@ -57,27 +55,4 @@ if($_POST){
         <p><a href='login.php'>Iniciar sesión</a></p>
     <?php } ?>
 </body>
-<style>
-    body {
-        background-color: rgb(255, 255, 255);
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    th {
-        background-color: rgb(98, 186, 98);
-        color: rgb(255, 255, 255);
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    td {
-        background-color: rgb(255, 255, 0);
-        padding: 10px;
-        text-align: center;
-    }
-</style>
-
 </html>
