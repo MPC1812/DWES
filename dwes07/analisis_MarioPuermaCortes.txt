@@ -1,0 +1,19 @@
+¿En que archivo están las funciones que se han registrado para su uso desde Javascript usando JAXON-JS?
+    En el archivo setup.php
+
+¿Qué funciones aparecen ya registradas para que se puedan utilizar desde Javascript y cual es el propósito de cada una?
+
+
+¿Qué fragmento de código PHP es el encargado de registrar cada función para su uso en JAXON-JS?
+
+
+¿Qué hace exactamente el código $jaxon->setOption('core.request.uri', BASE_URL . 'backend.php');?
+    Establece la ruta de acceso a la que se enviarán las peticiones AJAX.
+
+
+¿Cuál es el propósito del archivo comun.php?
+    Contiene funciones que se pueden usar desde cualquier archivo PHP.
+
+
+¿Porqué index.php incluye setup.php y no el archivo backend.php? Explícalo con tus palabras.
+    Porque setup.php es el archivo que se encarga de registrar las funciones para ser usadas desde Javascript y backend.php es el archivo que se encarga de procesar las peticiones AJAX, por tanto, index.php necesita incluirlo para que nuestras interacciones (peticiones AJAX) puedan ser procesadas.

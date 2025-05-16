@@ -1,9 +1,9 @@
 <?php
 
 
-define ('DB_DSN','');
-define ('DB_USER','');
-define ('DB_PASSWD','');
+define ('DB_DSN','mysql:host=localhost;dbname=dwes07');
+define ('DB_USER','root');
+define ('DB_PASSWD','Lahiguera1#');
 
 if (!defined('DB_USER') || !defined('DB_PASSWD'))
 {

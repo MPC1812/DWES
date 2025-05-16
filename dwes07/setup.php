@@ -28,11 +28,11 @@ function funcion2($nombre)
     return $response;
 }
 
-function listarLibrosAutor ($id)
+function listarLibrosAutor ($isbn)
 {
     $response = new Response();
     $response->clear('otros_libros_autor');
-    $response->assign('otros_libros_autor','innerHTML',"Aquí mostrar libros del autor del libro con id $id");
+    $response->assign('otros_libros_autor','innerHTML',"Aquí mostrar libros del autor del libro con ISBN $isbn");
     $response->assign('otros_libros_autor','style.display','block');
     $response->assign('otros_libros_autor','style.border','2px dotted blue');
     $response->assign('otros_libros_autor','style.padding','10px');

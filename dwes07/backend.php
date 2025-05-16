@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/setup.php';
 
-session_start();
+//session_start();
 
 if($jaxon->canProcessRequest())
 {
