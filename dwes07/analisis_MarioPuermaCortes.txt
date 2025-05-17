@@ -2,9 +2,20 @@
     En el archivo setup.php
 
 ¿Qué funciones aparecen ya registradas para que se puedan utilizar desde Javascript y cual es el propósito de cada una?
+    funcion1, funcion2, listarLibrosAutor
+
+    jaxon_funcion1(fechaYhora): El propósito de esta función es recibir una fecha y hora como argumento y, a través de una llamada asíncrona al servidor, mostrar esa información en un elemento HTML con el ID log.
+
+    jaxon_funcion2(nombre): Esta función espera un nombre como argumento. Al ser invocada desde Javascript, enviará este nombre al servidor y la respuesta actualizará el contenido del elemento HTML con el ID log mostrando el nombre recibido.
+
+    jaxon_listarLibrosAutor(isbn): El objetivo de esta función es tomar un ISBN como entrada. Cuando se llama desde Javascript, realizará una petición al servidor para obtener una lista de libros del autor asociado a ese ISBN. La respuesta del servidor limpiará el contenido de un elemento HTML con el ID otros_libros_autor, insertará un mensaje indicando el ISBN consultado y luego mostrará este elemento, aplicándole estilos de borde y relleno para que sea visible.
 
 
 ¿Qué fragmento de código PHP es el encargado de registrar cada función para su uso en JAXON-JS?
+    $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion1');
+    $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion2');
+    $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'listarLibrosAutor');
+    Como se puede ver, cada función que se quiera utilizar desde Javascript debe ser registrada en JAXON-JS con el método register().
 
 
 ¿Qué hace exactamente el código $jaxon->setOption('core.request.uri', BASE_URL . 'backend.php');?
