@@ -2,12 +2,9 @@
 require_once __DIR__ . '/conf/conf.php';
 require_once __DIR__ . '/comun.php';
 
-use Faker\Calculator\Isbn;
 use Jaxon\Jaxon;
 use Jaxon\Response\Response;
 use GuzzleHttp\Client;
-
-use function Laravel\Prompts\alert;
 
 $jaxon = jaxon();
 $jaxon->setOption("js.lib.uri", BASE_URL . "jaxon-dist");
@@ -62,6 +59,53 @@ function funcion2($nombre)
 function listarLibrosAutor($isbn)
 {
     $response = new Response();
+    $isbn = trim($isbn);
+    $isbn = filter_var($isbn, FILTER_VALIDATE_INT, ["options" => ["min_range" > 0]]);
+    if ($isbn == 0) {
+        $response->assign('otros_libros_autor', 'innerHTML', "El ISBN introducido no es correcto");
+        $response->assign('otros_libros_autor', 'style.display', 'block');
+        $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
+        $response->assign('otros_libros_autor', 'style.padding', '10px');
+        return $response;
+    }
+    try {
+        $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWD);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM libros WHERE isbn = :isbn";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':isbn' => $isbn]);
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($resultados as $fila) {
+            $autor = $fila['autor'];
+        }
+        if (empty($autor)) {
+            $response->assign('otros_libros_autor', 'innerHTML', "No hay libros del autor con ese ISBN o no existe en la base de datos");
+            $response->assign('otros_libros_autor', 'style.display', 'block');
+            $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
+            $response->assign('otros_libros_autor', 'style.padding', '10px');
+            return $response;
+        }
+        //Hacemos la conexión con la API con Guzzle
+        $client = new Client();
+        $respuesta = $client->request('GET', 'https://openlibrary.org/search.json?author=' . $autor . '&sort=new');
+        $json = json_decode($respuesta->getBody()->getContents());
+        //Pendiente de implementar la función que devuelva el HTML de la página
+ 
+
+
+
+        $response->assign('otros_libros_autor', 'innerHTML', $autor);
+        $response->assign('otros_libros_autor', 'style.display', 'block');
+        $response->assign('otros_libros_autor', 'style.border', '2px dotted blue');
+        $response->assign('otros_libros_autor', 'style.padding', '10px');
+        return $response;
+    } catch (PDOException $e) {
+        $response->assign('otros_libros_autor', 'innerHTML', "Error: " . $e->getMessage());
+        $response->assign('otros_libros_autor', 'style.display', 'block');
+        $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
+        $response->assign('otros_libros_autor', 'style.padding', '10px');
+        return $response;
+    }
     $response->clear('otros_libros_autor');
     $response->assign('otros_libros_autor', 'innerHTML', "Aquí mostrar libros del autor del libro con ISBN $isbn");
     $response->assign('otros_libros_autor', 'style.display', 'block');
@@ -93,27 +137,28 @@ function registrarLibro($isbn, $titulo, $autor, $anio, $paginas, $ejemplares, $a
     $anio = filter_var($anio, FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
     $paginas = filter_var($paginas, FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
     $ejemplares = filter_var($ejemplares, FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]]);
-    if (empty($isbn || strlen($isbn) > 13)) {
-        $arraylog[] = 'El ISBN introducido no es correcto';
-        $contador++;
-    }
-    if (empty($titulo) || strlen($titulo) >255) {
+    if (empty($titulo) || strlen($titulo) > 255) {
         $arraylog[] = 'El título introducido no es correcto';
         $contador++;
     }
-    if (empty($autor) || strlen($autor) >255) {
+    if (empty($isbn) || strlen($isbn) > 13 || !is_numeric($isbn)) //Aquí pondría !is_int($isbn) para que sean sólo números enteros ya que la comprobación permite decimales
+    {
+        $arraylog[] = 'El ISBN introducido no es correcto';
+        $contador++;
+    }
+    if (empty($autor) || strlen($autor) > 255) {
         $arraylog[] = 'El autor introducido no es correcto';
         $contador++;
     }
-    if (empty($anio) || $anio > $anioactual) {
+    if (empty($anio) || $anio >= $anioactual || !is_int($anio) || $anio<=0) { //Según la tarea no se pide que el año no esté vacío aunque lo he dejado por lógica
         $arraylog[] = 'El año introducido no es correcto';
         $contador++;
     }
-    if (empty($paginas) || strlen($paginas) >255) {
+    if (empty($paginas) ||!is_int($paginas) || $paginas<=0) {
         $arraylog[] = 'El número de páginas introducido no es correcto';
         $contador++;
     }
-    if (empty($ejemplares) || strlen($ejemplares) >255) {
+    if (empty($ejemplares) || !is_int($ejemplares) || $ejemplares<0) {
         $arraylog[] = 'El número de ejemplares introducido no es correcto';
         $contador++;
     }
@@ -121,17 +166,18 @@ function registrarLibro($isbn, $titulo, $autor, $anio, $paginas, $ejemplares, $a
         try {
             $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWD);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO libros (titulo, isbn, autor, anio, paginas, ejemplares) VALUES (:titulo, :isbn, :autor, :anio, :paginas, :ejemplares)";
+            $sql = "INSERT INTO libros (titulo, isbn, autor, anio_publicacion, paginas, ejemplares_disponibles) VALUES (:titulo, :isbn, :autor, :anio_publicacion, :paginas, :ejemplares_disponibles)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':titulo' => $titulo,
                 ':isbn' => $isbn,
                 ':autor' => $autor,
-                ':anio' => $anio,
+                ':anio_publicacion' => $anio,
                 ':paginas' => $paginas,
-                ':ejemplares' => $ejemplares
+                ':ejemplares_disponibles' => $ejemplares
             ]);
-            $response->assign('log', 'innerHTML', '<div>Se ha registrado el libro ' . $titulo . ' con ISBN ' . $isbn . '</div>');
+            $id = $pdo->lastInsertId();
+            $response->assign('log', 'innerHTML', '<div>Se ha registrado el libro ' . $id . ' por Mario Puerma Cortés');
             return $response;
         } catch (PDOException $e) {
             $response->assign('log', 'innerHTML', '<div>Error: ' . $e->getMessage() . '</div>');
@@ -141,7 +187,6 @@ function registrarLibro($isbn, $titulo, $autor, $anio, $paginas, $ejemplares, $a
     $response->assign('log', 'innerHTML', '<div>Los datos introducidos no son correctos</div><br><div>' . implode('<br>', $arraylog) . '</div>');
     return $response;
 }
-    //Insertar el libro en la base de datos
 
 $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion1');
 $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion2');

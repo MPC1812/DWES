@@ -58,7 +58,6 @@ $jaxonScript = $jaxon->getScript();
     </div>
 
     <input type="button" value="Actualizar lista de libros" onclick="jaxon_listarLibrosMPC(function(data){
-        console.log(data);
         document.getElementById('listaLibros').innerHTML = data;
     });">
 
@@ -78,7 +77,8 @@ $jaxonScript = $jaxon->getScript();
         <label> Ejemplares disponibles:<input id="ejemplares" type="text" name="ejemplares"></label>
         <BR>
         <input type="button"
-            onclick="jaxon_registrarLibro(isbn.value, titulo.value, autor.value, anio.value, paginas.value, ejemplares.value, anioActual)"
+            onclick="jaxon_registrarLibro(isbn.value, titulo.value, autor.value, anio.value, paginas.value, ejemplares.value, anioActual); jaxon_listarLibrosMPC(function(data){
+                document.getElementById('listaLibros').innerHTML = data;});"
             value="Añadir nuevo libro.">
     </form>
     <br>
@@ -126,6 +126,10 @@ $jaxonScript = $jaxon->getScript();
         const paginas = document.getElementById("paginas");
         const ejemplares = document.getElementById("ejemplares");
         const anioActual = new Date().getFullYear();
+    </script>
+    <script>
+        const isbnbuscar = document.getElementById("otros_autores_isbn");
+        const otrosLibrosAutor = document.getElementById("otros_libros_autor");
     </script>
 </body>
 
