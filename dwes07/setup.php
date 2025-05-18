@@ -88,18 +88,27 @@ function listarLibrosAutor($isbn)
         //Hacemos la conexión con la API con Guzzle
         $client = new Client();
         $respuesta = $client->request('GET', 'https://openlibrary.org/search.json?author=' . $autor . '&sort=new');
-        $json = json_decode($respuesta->getBody()->getContents());
-        //Pendiente de implementar la función que devuelva el HTML de la página
- 
-
-
-
-        $response->assign('otros_libros_autor', 'innerHTML', $autor);
-        $response->assign('otros_libros_autor', 'style.display', 'block');
-        $response->assign('otros_libros_autor', 'style.border', '2px dotted blue');
-        $response->assign('otros_libros_autor', 'style.padding', '10px');
-        return $response;
-    } catch (PDOException $e) {
+        $code = $respuesta->getStatusCode(); //Obtener el código de respuesta HTTP
+        $body = $respuesta->getBody()->getContents(); //Obtener el contenido cuerpo del mensaje
+        $body = json_decode($body, true);
+        $html = "";
+        $autorname = "";
+        if ($code == 200) {
+            foreach ($body['docs'] as $libro) {
+                foreach ($libro['author_name'] as $autor) {
+                    $autorname .= $autor." ";
+                }
+                $title = $libro['title'];
+                $html .= $autorname . $title . "<br>";
+                $autorname = "";
+            }
+            $response->assign('otros_libros_autor', 'innerHTML', $html ); //$body['docs'][1]['title']
+            $response->assign('otros_libros_autor', 'style.display', 'block');
+            $response->assign('otros_libros_autor', 'style.border', '2px dotted blue');
+            $response->assign('otros_libros_autor', 'style.padding', '10px');
+            return $response;
+        }
+        } catch (PDOException $e) {
         $response->assign('otros_libros_autor', 'innerHTML', "Error: " . $e->getMessage());
         $response->assign('otros_libros_autor', 'style.display', 'block');
         $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
@@ -150,15 +159,15 @@ function registrarLibro($isbn, $titulo, $autor, $anio, $paginas, $ejemplares, $a
         $arraylog[] = 'El autor introducido no es correcto';
         $contador++;
     }
-    if (empty($anio) || $anio >= $anioactual || !is_int($anio) || $anio<=0) { //Según la tarea no se pide que el año no esté vacío aunque lo he dejado por lógica
+    if (empty($anio) || $anio >= $anioactual || !is_int($anio) || $anio <= 0) { //Según la tarea no se pide que el año no esté vacío aunque lo he dejado por lógica
         $arraylog[] = 'El año introducido no es correcto';
         $contador++;
     }
-    if (empty($paginas) ||!is_int($paginas) || $paginas<=0) {
+    if (empty($paginas) || !is_int($paginas) || $paginas <= 0) {
         $arraylog[] = 'El número de páginas introducido no es correcto';
         $contador++;
     }
-    if (empty($ejemplares) || !is_int($ejemplares) || $ejemplares<0) {
+    if (empty($ejemplares) || !is_int($ejemplares) || $ejemplares < 0) {
         $arraylog[] = 'El número de ejemplares introducido no es correcto';
         $contador++;
     }
