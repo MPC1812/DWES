@@ -127,10 +127,6 @@ $jaxonScript = $jaxon->getScript();
         const ejemplares = document.getElementById("ejemplares");
         const anioActual = new Date().getFullYear();
     </script>
-    <script>
-        const isbnbuscar = document.getElementById("otros_autores_isbn");
-        const otrosLibrosAutor = document.getElementById("otros_libros_autor");
-    </script>
 </body>
 
 </html>
