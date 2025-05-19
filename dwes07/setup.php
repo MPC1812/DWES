@@ -60,10 +60,11 @@ function listarLibrosAutor($isbn)
 {
     $response = new Response();
     $response->clear('log');
-    $response->clear('otros_libros_autor');
+    $response->assign('otros_libros_autor', 'style.display', 'none');
     $isbn = trim($isbn);
     $isbn = filter_var($isbn, FILTER_VALIDATE_INT, ["options" => ["min_range" > 0]]);
     if ($isbn == 0) {
+        //$response->assign('otros_libros_autor', 'style.display', 'none');
         $response->clear('log');
         $response->assign('log', 'innerHTML', "El ISBN introducido no es correcto");
         $response->assign('log', 'style.display', 'block');
@@ -82,7 +83,9 @@ function listarLibrosAutor($isbn)
             $autor = $fila['autor'];
         }
         if (empty($autor)) {
-            $response->assign('log', 'innerHTML', "No hay libros del autor con ese ISBN o no existe en la base de datos");
+            //$response->assign('otros_libros_autor', 'style.display', 'none');
+            $response->clear('log');
+            $response->assign('log', 'innerHTML', "ISBN no existe en la base de datos");
             $response->assign('log', 'style.display', 'block');
             $response->assign('log', 'style.border', '2px dotted red');
             $response->assign('log', 'style.padding', '10px');
@@ -99,7 +102,7 @@ function listarLibrosAutor($isbn)
         $html .= "<th>Autor</th>";
         $html .= "</tr></thead><tbody>";
         $autorname = "";
-        if ($code == 200) {
+        if ($code == 200 && $body['numFound'] > 0) {
             foreach ($body['docs'] as $libro) {
                 $html .= "<tr>";
                 foreach ($libro['author_name'] as $autor) {
@@ -117,13 +120,16 @@ function listarLibrosAutor($isbn)
             $response->assign('otros_libros_autor', 'style.padding', '10px');
             return $response;
         } else {
-            $response->assign('log', 'innerHTML', "Error en la Api de Openlibrary, por favor inténtelo de nuevo más tarde.");
+            //$response->assign('otros_libros_autor', 'style.display', 'none');
+            $response->clear('log');
+            $response->assign('log', 'innerHTML', "No se han encontrado libros de " . $autor);
             $response->assign('log', 'style.display', 'block');
             $response->assign('log', 'style.border', '2px dotted red');
             $response->assign('log', 'style.padding', '10px');
             return $response;
         }
     } catch (PDOException $e) {
+        //$response->assign('otros_libros_autor', 'style.display', 'none');
         $response->assign('log', 'innerHTML', "Error: " . $e->getMessage());
         $response->assign('log', 'style.display', 'block');
         $response->assign('log', 'style.border', '2px dotted red');
