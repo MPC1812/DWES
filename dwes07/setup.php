@@ -97,10 +97,7 @@ function listarLibrosAutor($isbn)
         $code = $respuesta->getStatusCode(); //Obtener el código de respuesta HTTP
         $body = $respuesta->getBody()->getContents(); //Obtener el contenido cuerpo del mensaje
         $body = json_decode($body, true);
-        $html = "<table><thead><tr>";
-        $html .= "<th>Título</th>";
-        $html .= "<th>Autor</th>";
-        $html .= "</tr></thead><tbody>";
+        $html = "<table><thead><tr><th>Título</th><th>Autor</th></tr></thead><tbody>";
         $autorname = "";
         if ($code == 200 && $body['numFound'] > 0) {
             foreach ($body['docs'] as $libro) {
@@ -165,7 +162,7 @@ function registrarLibro($isbn, $titulo, $autor, $anio, $paginas, $ejemplares, $a
         $arraylog[] = 'El título introducido no es correcto';
         $contador++;
     }
-    if (empty($isbn) || strlen($isbn) > 13 || !is_numeric($isbn)) //Aquí pondría !is_int($isbn) para que sean sólo números enteros ya que la comprobación permite decimales
+    if (empty($isbn) || strlen($isbn) > 13 || !is_numeric($isbn)) //Aquí pondría !is_int($isbn) para que sean sólo números enteros ya que la comprobación permite decimales o usaría FILTER_VALIDATE_INT
     {
         $arraylog[] = 'El ISBN introducido no es correcto';
         $contador++;

@@ -15,7 +15,7 @@
     $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion1');
     $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'funcion2');
     $jaxon->register(Jaxon::CALLABLE_FUNCTION, 'listarLibrosAutor');
-    Como se puede ver, cada función que se quiera utilizar desde Javascript debe ser registrada en JAXON-JS con el método register().
+    Como se puede ver, cada función que se quiera utilizar desde Javascript debe ser registrada con el método register().
 
 
 ¿Qué hace exactamente el código $jaxon->setOption('core.request.uri', BASE_URL . 'backend.php');?
