@@ -59,13 +59,16 @@ function funcion2($nombre)
 function listarLibrosAutor($isbn)
 {
     $response = new Response();
+    $response->clear('log');
+    $response->clear('otros_libros_autor');
     $isbn = trim($isbn);
     $isbn = filter_var($isbn, FILTER_VALIDATE_INT, ["options" => ["min_range" > 0]]);
     if ($isbn == 0) {
-        $response->assign('otros_libros_autor', 'innerHTML', "El ISBN introducido no es correcto");
-        $response->assign('otros_libros_autor', 'style.display', 'block');
-        $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
-        $response->assign('otros_libros_autor', 'style.padding', '10px');
+        $response->clear('log');
+        $response->assign('log', 'innerHTML', "El ISBN introducido no es correcto");
+        $response->assign('log', 'style.display', 'block');
+        $response->assign('log', 'style.border', '2px dotted red');
+        $response->assign('log', 'style.padding', '10px');
         return $response;
     }
     try {
@@ -79,10 +82,10 @@ function listarLibrosAutor($isbn)
             $autor = $fila['autor'];
         }
         if (empty($autor)) {
-            $response->assign('otros_libros_autor', 'innerHTML', "No hay libros del autor con ese ISBN o no existe en la base de datos");
-            $response->assign('otros_libros_autor', 'style.display', 'block');
-            $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
-            $response->assign('otros_libros_autor', 'style.padding', '10px');
+            $response->assign('log', 'innerHTML', "No hay libros del autor con ese ISBN o no existe en la base de datos");
+            $response->assign('log', 'style.display', 'block');
+            $response->assign('log', 'style.border', '2px dotted red');
+            $response->assign('log', 'style.padding', '10px');
             return $response;
         }
         //Hacemos la conexión con la API con Guzzle
@@ -91,36 +94,42 @@ function listarLibrosAutor($isbn)
         $code = $respuesta->getStatusCode(); //Obtener el código de respuesta HTTP
         $body = $respuesta->getBody()->getContents(); //Obtener el contenido cuerpo del mensaje
         $body = json_decode($body, true);
-        $html = "";
+        $html = "<table><thead><tr>";
+        $html .= "<th>Título</th>";
+        $html .= "<th>Autor</th>";
+        $html .= "</tr></thead><tbody>";
         $autorname = "";
         if ($code == 200) {
             foreach ($body['docs'] as $libro) {
+                $html .= "<tr>";
                 foreach ($libro['author_name'] as $autor) {
-                    $autorname .= $autor." ";
+                    $autorname .= $autor . " ";
                 }
-                $title = $libro['title'];
-                $html .= $autorname . $title . "<br>";
+                $html .= "<td>" . $libro['title'] . "</td>";
+                $html .= "<td>" . $autorname . "</td>";
+                $html .= "</tr>";
                 $autorname = "";
             }
-            $response->assign('otros_libros_autor', 'innerHTML', $html ); //$body['docs'][1]['title']
+            $html .= "</tbody></table>";
+            $response->assign('otros_libros_autor', 'innerHTML', $html);
             $response->assign('otros_libros_autor', 'style.display', 'block');
             $response->assign('otros_libros_autor', 'style.border', '2px dotted blue');
             $response->assign('otros_libros_autor', 'style.padding', '10px');
             return $response;
+        } else {
+            $response->assign('log', 'innerHTML', "Error en la Api de Openlibrary, por favor inténtelo de nuevo más tarde.");
+            $response->assign('log', 'style.display', 'block');
+            $response->assign('log', 'style.border', '2px dotted red');
+            $response->assign('log', 'style.padding', '10px');
+            return $response;
         }
-        } catch (PDOException $e) {
-        $response->assign('otros_libros_autor', 'innerHTML', "Error: " . $e->getMessage());
-        $response->assign('otros_libros_autor', 'style.display', 'block');
-        $response->assign('otros_libros_autor', 'style.border', '2px dotted red');
-        $response->assign('otros_libros_autor', 'style.padding', '10px');
+    } catch (PDOException $e) {
+        $response->assign('log', 'innerHTML', "Error: " . $e->getMessage());
+        $response->assign('log', 'style.display', 'block');
+        $response->assign('log', 'style.border', '2px dotted red');
+        $response->assign('log', 'style.padding', '10px');
         return $response;
     }
-    $response->clear('otros_libros_autor');
-    $response->assign('otros_libros_autor', 'innerHTML', "Aquí mostrar libros del autor del libro con ISBN $isbn");
-    $response->assign('otros_libros_autor', 'style.display', 'block');
-    $response->assign('otros_libros_autor', 'style.border', '2px dotted blue');
-    $response->assign('otros_libros_autor', 'style.padding', '10px');
-    return $response;
 }
 
 function listarLibrosMPC()
